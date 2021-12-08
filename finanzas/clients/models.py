@@ -1,6 +1,6 @@
 from enum import Enum
 from django.db import models
-    
+
 class Client(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
     last_name = models.CharField(max_length=200, null=False, blank=False)
