@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+def create(request):
+    context = {}
+    return render(request, 'credits/create.html', context)
