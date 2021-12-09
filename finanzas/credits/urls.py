@@ -5,5 +5,5 @@ from .views import create
 app_name = 'credits'
 
 urlpatterns = [
-    path('create/', create, name='create'),
+    path('nuevo/', create, name='create'),
 ]

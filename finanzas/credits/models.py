@@ -1,12 +1,17 @@
-from enum import Enum
+from enum import IntEnum
 
 from django.db import models
 from clients.models import Client
 
-class CreditState(Enum):
+class CreditState(IntEnum):
     CREATED = 0
     AUTHORIZED = 1
     COMPLETED = 2
+    
+    @classmethod
+    def states(cls):
+        return [(state, state.value) for state in cls] 
+    
 
 class Credit(models.Model):
     folder = models.CharField(max_length=100, null=False, blank=False)
@@ -14,10 +19,11 @@ class Credit(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     request_amount = models.IntegerField(default=0, null=False, blank=False) #Cents?
     authorized_amount = models.IntegerField(default=0, null=False, blank=False) #Cents?
-    state = models.IntegerField(default=0, choices=[(state, state.value) for state in CreditState] ) # CREATED
+    state = models.IntegerField(default=CreditState.CREATED, choices=CreditState.states()) # CREATED
     cycle = models.IntegerField(default=0) # Semanal
     
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{uuid} - '
+        return f'{self.uuid}'
+    
