@@ -1,23 +1,57 @@
 {% extends 'bases/base.html' %}
+{% load static %}
+
 
 {% block content %}
-    <div class=""> 
-        <section class="py-8">
-        <div class="container px-1 mx-auto">
-            <div class="pt-6 bg-white shadow rounded">
-            <div class="px-6 border-b">
-                <div class="flex flex-wrap items-center mb-6">
+<div class=""> 
+    <section class="py-8">
+    <div class="container px-1 mx-auto">
+        <div class="pt-6 bg-white shadow rounded">
+        <div class="px-6 border-b">
+            <div class="flex flex-wrap items-center mb-6">
                 <h3 class="text-xl font-bold">Nuevo credito</h3>
-                <a class="ml-auto flex items-center py-2 px-3 text-xs text-white bg-indigo-500 hover:bg-indigo-600 rounded" href="#">
-                    <span>Nuevo credito</span>
-                </a>
-                </div>
-            </div>
-            <div class="overflow-x-auto">
-                
-            </div>
             </div>
         </div>
-        </section>
+        <div class="overflow-x-auto">
+            <div class="container px-4 mx-auto mt-5">
+                
+                <form action="#" method="post">
+                    
+                    {% csrf_token %}
+
+                    <div class="client mb-6">
+                        <p class="text-gray-500 hover:text-blue-600 mt-6 mb-6 text-lg">Datos generales del cliente</p>
+
+                        <div class="flex flex-wrap -mx-4 -mb-4 md:mb-0">
+                            <div class="w-full md:w-1/2 px-4 mb-4 md:mb-0">
+                                <div class="mb-6">
+                                    {% include 'snippets/input.html' with input=form.name %}
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/2 px-4 mb-4 md:mb-0">
+                                <div class="mb-6">
+                                    {% include 'snippets/input.html' with input=form.last_name %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {% include 'snippets/input.html' with input=form.curp %}
+
+                        {% include 'snippets/input.html' with input=form.dni %}
+                        
+                        {% include 'snippets/input.html' with input=form.phone_number %}
+                    </div>
+
+                
+                    <div class="mt-6 mb-6">
+                        <input type="submit" value="Crear nueva solicitud" class="cursor-pointer flex items-center py-2 px-4 bg-indigo-500 hover:bg-indigo-600 text-sm font-medium text-white rounded">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        </div>
     </div>
+    </section>
+</div>
 {% endblock %}
