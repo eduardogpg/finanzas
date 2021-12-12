@@ -1,0 +1,20 @@
+{% extends 'bases/base.html' %}
+
+{% block content %}
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        {% include 'snippets/input.html' with input=form.username %}
+        {% include 'snippets/input.html' with input=form.email %}
+        {% include 'snippets/input.html' with input=form.password %}
+
+        {% include 'snippets/input.html' with input=form.is_active %}
+        {% include 'snippets/input.html' with input=form.is_superuser %}
+        
+        <div class="mt-5 mb-5">
+            <input type="submit" value="Actualizar usuario" class="cursor-pointer flex items-center py-2 px-4 bg-indigo-500 hover:bg-indigo-600 text-sm font-medium text-white rounded">
+        </div>
+    </form>
+    
+{% endblock %}
