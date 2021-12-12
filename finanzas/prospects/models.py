@@ -63,6 +63,11 @@ class Client(models.Model):
         return f'{self.prospect.name} {self.prospect.last_name}'
     
 
+    @property
+    def marital_state_format(self):
+        return Client.MARITAL_STATE_CHOICES.choices[self.marital_state][1]
+    
+    
 class Aval(models.Model):
     prospect = models.OneToOneField(Prospect, on_delete=models.CASCADE, primary_key=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='avals')

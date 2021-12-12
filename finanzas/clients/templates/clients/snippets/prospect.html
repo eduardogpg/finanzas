@@ -54,7 +54,7 @@
     <div class="flex items-center">
       <h4 class="text-sm text-gray-500">Estado</h4>
     </div>
-    <span class="text-sm">{{ address.state }}</span>
+    <span class="text-sm">{{ address.state_format }}</span>
 </div>
 <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
@@ -62,3 +62,33 @@
     </div>
     <span class="text-sm">{{ address.zip }}</span>
 </div>
+
+{% if customer %}
+  <hr class="mt-4 mb-4">
+  
+  <div class="flex mb-4 justify-between items-center">
+    <div class="flex items-center">
+      <h4 class="text-sm text-gray-500">Estado civil</h4>
+    </div>
+    <span class="text-sm">{{ customer.marital_state_format }}</span>
+  </div>
+  <div class="flex mb-4 justify-between items-center">
+    <div class="flex items-center">
+      <h4 class="text-sm text-gray-500">Ocupación</h4>
+    </div>
+    <span class="text-sm">{{ customer.job }}</span>
+  </div>
+  <div class="flex mb-4 justify-between items-center">
+    <div class="flex items-center">
+      <h4 class="text-sm text-gray-500">Nombre del conyugue</h4>
+    </div>
+    <span class="text-sm">{{ customer.spouse }}</span>
+  </div>
+  <div class="flex mb-4 justify-between items-center">
+    <div class="flex items-center">
+      <h4 class="text-sm text-gray-500">Número de hijos</h4>
+    </div>
+    <span class="text-sm">{{ customer.children }}</span>
+  </div>
+
+{% endif %}

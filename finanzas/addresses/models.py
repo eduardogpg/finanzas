@@ -19,4 +19,9 @@ class Address(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return f'#{self.address} - {self.township}'
+        return f'#{self.address} - {self.township} - {self.zip} - {self.state_format}'
+    
+    
+    @property
+    def state_format(self):
+        return STATES_CHOICES[self.state][1]

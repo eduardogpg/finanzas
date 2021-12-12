@@ -1,21 +1,35 @@
 <div class="w-full p-4">
   <div class="relative p-6 bg-slate-50 shadow rounded">
-    <h3 class="text-center font-medium">{{ client.full_name }}</h3>
+    <h3 class="text-left font-bold text-xl">{{ client.full_name }}</h3>
     <p class="mb-6 text-center text-sm text-gray-500">{{ client.prospect.job }}</p>
-    <p class="mb-6 text-xs">
-      {{ client.address }}
-    </p>
-    <p class="flex items-center mb-4 text-sm">
-      <span>{{ client.prospect.DNI }}</span>
-    </p>
-    <p class="flex items-center mb-4 text-sm">
-      <span>{{ client.prospect.curp }}</span>
-    </p>
-    <p class="flex items-center mb-6 text-sm">
-      <span>{{ client.prospect.phone_number }}</span>
-    </p>
+  
+	<div class="mt-4 mb-4">
+		<p class="flex items-center text-sm">
+			<div class="flex items-center">
+			<h4 class="text-sm text-gray-500">CURP</h4>
+		  </div>
+			<span>{{ client.prospect.curp }}</span>
+		</p>
+	</div>
+	<div class="mt-4 mb-4">
+		<p class="flex items-center text-sm">
+			<div class="flex items-center">
+			<h4 class="text-sm text-gray-500">Clave de elector</h4>
+		  </div>
+			<span>{{ client.prospect.DNI }}</span>
+		</p>
+	</div>
+	<div class="mt-4 mb-4">
+		<p class="flex items-center text-sm">
+			<div class="flex items-center">
+			<h4 class="text-sm text-gray-500">Número teléfonico</h4>
+		  </div>
+			<span>{{ client.prospect.phone_number }}</span>
+		</p>
+	</div>
+
     <a class="flex items-center justify-center py-2 text-sm text-white bg-indigo-500 hover:bg-indigo-600 rounded transition duration-200" href="{% url 'clients:detail' pk=client.pk %}">
-      <span>Detalles</span>
+      <span>Ver detalles del cliente</span>
     </a>
   </div>
 </div>
