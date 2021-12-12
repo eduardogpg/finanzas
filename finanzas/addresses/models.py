@@ -9,10 +9,10 @@ STATES_CHOICES = [
 class Address(models.Model):
     prospect = models.ForeignKey(Prospect, on_delete=models.CASCADE, related_name='addresses')
     address = models.CharField(max_length=255, null=False, blank=False)
-    zip = models.IntegerField(null=False, blank=False)
+    zip = models.IntegerField(null=True, blank=True)
     state = models.IntegerField(default=0, null=False, blank=False) # Chiapas
-    suburb = models.CharField(max_length=255, null=False, blank=False) # Colonia
-    township = models.CharField(max_length=255, null=False, blank=False) # Ciudad
+    suburb = models.CharField(max_length=255, null=True, blank=True) # Colonia
+    township = models.CharField(max_length=255, null=True, blank=True) # Ciudad
     lat = models.IntegerField(null=True)
     long = models.IntegerField(null=True)
     

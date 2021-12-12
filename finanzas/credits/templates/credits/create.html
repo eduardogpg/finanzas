@@ -20,13 +20,13 @@
                     {% csrf_token %}
                     
                     <div>
-                        <p class="text-gray-600 hover:text-blue-700 mt-6 mb-6 text-lg">Solicitud de credito</p>
+                        <p class="text-gray-600 hover:text-blue-700 mt-6 mb-6 text-2xl">Solicitud de credito</p>
                         {% include 'snippets/input.html' with input=form.request_amount %}
                         {% include 'snippets/input.html' with input=form.authorized_amount %}
                     </div>
 
                     <div class="client mb-6">
-                        <p class="text-gray-500 hover:text-blue-600 mt-6 mb-6 text-lg">Datos generales del cliente</p>
+                        <p class="text-gray-500 hover:text-blue-600 mt-6 mb-6 text-2xl">Datos generales del cliente</p>
                         <div class="flex flex-wrap -mx-4 -mb-4 md:mb-0">
                             <div class="w-full md:w-1/2 px-4 mb-4 md:mb-0">
                                 <div class="mb-6">
@@ -61,7 +61,7 @@
                     </div>
 
                     <div class="mt-5 mb-5">
-                        <p class="text-gray-500 hover:text-blue-600 mt-6 mb-6 text-lg">Datos del Aval</p>
+                        <p class="text-gray-500 hover:text-blue-600 mt-6 mb-6 text-2xl">Datos del Aval</p>
 
                         {% include 'snippets/input.html' with input=form.aval_name %}
                         {% include 'snippets/input.html' with input=form.aval_last_name %}
@@ -76,6 +76,39 @@
                         {% include 'snippets/input.html' with input=form.aval_township %}
                         {% include 'snippets/input.html' with input=form.aval_suburb %}
                         {% include 'snippets/input.html' with input=form.aval_zip %}
+                    </div>
+
+                    <div class="mt-5 mb-5">
+                        <p class="text-gray-500 hover:text-blue-600 mt-6 mb-6 text-2xl">Referencias</p>
+
+                        <div class="flex flex-wrap -mx-4 -mb-4 md:mb-0">
+                            <div class="w-full md:w-1/2 px-4 mb-4 md:mb-0">
+                                <div class="mb-6">
+                                    {% include 'snippets/input.html' with input=form.reference_1_name %}
+                                    {% include 'snippets/input.html' with input=form.reference_1_contact %}
+                                    {% include 'snippets/input.html' with input=form.reference_1_address %}
+                                    {% include 'snippets/input.html' with input=form.reference_1_relationship %}
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/2 px-4 mb-4 md:mb-0">
+                                <div class="mb-6">
+                                    {% include 'snippets/input.html' with input=form.reference_2_name %}
+                                    {% include 'snippets/input.html' with input=form.reference_2_contact %}
+                                    {% include 'snippets/input.html' with input=form.reference_2_address %}
+                                    {% include 'snippets/input.html' with input=form.reference_2_relationship %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="mt-5 mb-5">
+                        <p class="text-gray-500 hover:text-blue-600 mt-6 mb-6 text-2xl">Garantias</p>
+
+                        {% include 'snippets/input.html' with input=form.guarantee_1 %}
+                        {% include 'snippets/input.html' with input=form.guarantee_2 %}
+                        {% include 'snippets/input.html' with input=form.guarantee_3 %}
+                        
                     </div>
 
                     <div class="mt-6 mb-6">

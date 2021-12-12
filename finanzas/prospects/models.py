@@ -5,10 +5,10 @@ from django.utils.translation import gettext_lazy as _
 
 class Prospect(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
-    last_name = models.CharField(max_length=200, null=False, blank=False)
-    phone_number = models.IntegerField(null=False, blank=False)
-    curp = models.CharField(max_length=18, null=False, blank=False)
-    DNI = models.CharField(max_length=50, null=False, blank=False) 
+    last_name = models.CharField(max_length=200, null=True, blank=True)
+    phone_number = models.IntegerField(null=True, blank=True)
+    curp = models.CharField(max_length=18, null=True, blank=True)
+    DNI = models.CharField(max_length=50, null=True, blank=True) 
     
     created_at = models.DateTimeField(auto_now_add=True)
     
@@ -39,6 +39,10 @@ class Client(models.Model):
     def __str__(self):
         return f'{self.prospect.full_name}'
     
+    @property
+    def address(self):
+        return self.project.addresses.first()
+    
 
 class Aval(models.Model):
     prospect = models.OneToOneField(Prospect, on_delete=models.CASCADE, primary_key=True)
@@ -47,11 +51,32 @@ class Aval(models.Model):
     def __str__(self):
         return f'{self.prospect.full_name}'
     
+    
+class ReferenceManager(models.Manager):
+    
+    def create_reference(self, client, data):
+        from addresses.models import Address
+        
+        prospect = Prospect.objects.create(name=data['name'])
+        address = Address.objects.create(address=data['address'], prospect=prospect)
+        
+        return self.create(
+            client=client,
+            prospect=prospect,
+            relationship=data['relationship'],
+            contact=data['contact']
+        )
+        
 
 class Reference(models.Model):
     prospect = models.OneToOneField(Prospect, on_delete=models.CASCADE, primary_key=True)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='references')
+    
     relationship = models.CharField(max_length=255)
+    contact = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    objects = ReferenceManager()
     
     def __str__(self):
         return f'{self.prospect.full_name}'

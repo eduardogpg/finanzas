@@ -10,8 +10,19 @@ from addresses.models import Address
 from prospects.models import Aval
 from prospects.models import Client
 from prospects.models import Prospect
+from prospects.models import Reference
 
 from credits.models import Credit
+
+from guarantees.models import Guarantee
+
+def clean_reference(form, reference):
+    return {
+        'name': form.cleaned_data[f'{reference}_name'],
+        'address': form.cleaned_data[f'{reference}_address'],
+        'contact': form.cleaned_data[f'{reference}_contact'],
+        'relationship':form.cleaned_data[f'{reference}_relationship'],
+    }
 
 def create_entities(form):
     prospect = Prospect(
@@ -69,8 +80,13 @@ def create_entities(form):
         Aval.objects.create(prospect=prospect_aval)
         
         # Referencias
+        Reference.objects.create_reference(client, clean_reference(form, 'reference_1'))
+        Reference.objects.create_reference(client, clean_reference(form, 'reference_2'))
         
         # Garantias
+        Guarantee.objects.create(client=client, description=form.cleaned_data['guarantee_1'])
+        Guarantee.objects.create(client=client, description=form.cleaned_data['guarantee_2'])
+        Guarantee.objects.create(client=client, description=form.cleaned_data['guarantee_3'])
         
         return client
     

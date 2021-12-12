@@ -43,6 +43,30 @@ class NewCreditForm(forms.Form):
     aval_suburb = forms.CharField(label='Colonia', max_length=100, required=True)
     aval_zip = forms.CharField(label='Código Postal', max_length=10, required=True)
     
+    
+    reference_1_name = forms.CharField(label='Nombre', max_length=100, required=True)
+    reference_1_contact = forms.CharField(label='Contacto', max_length=255, required=True)
+    reference_1_address = forms.CharField(label='Dirección', max_length=18, required=True)
+    reference_1_relationship = forms.CharField(label='Parentesco', max_length=100, required=True)
+    
+    reference_2_name = forms.CharField(label='Nombre', max_length=200, required=True)
+    reference_2_contact = forms.CharField(label='Contacto', max_length=255, required=True)
+    reference_2_address = forms.CharField(label='Dirección', max_length=28, required=True)
+    reference_2_relationship = forms.CharField(label='Parentesco', max_length=100, required=True)
+    
+    guarantee_1 = forms.CharField(label='Artículo 1 (Descripción)', required=True, widget=forms.Textarea(
+        attrs={'rows':4 }
+    ))
+    
+    guarantee_2 = forms.CharField(label='Artículo 2 (Descripción)', required=True, widget=forms.Textarea(
+        attrs={'rows':4 }
+    ))
+    
+    guarantee_3 = forms.CharField(label='Artículo 3 (Descripción)', required=True, widget=forms.Textarea(
+        attrs={'rows':4 }
+    ))
+    
+    
     def __init__(self, *args, **kwargs):
         super(NewCreditForm, self).__init__(*args, **kwargs)
 
@@ -77,6 +101,21 @@ class NewCreditForm(forms.Form):
         self.fields['aval_township'].widget.attrs['class'] = self.input_text_css
         self.fields['aval_suburb'].widget.attrs['class'] = self.input_text_css
         self.fields['aval_zip'].widget.attrs['class'] = self.input_text_css
+        
+        
+        self.fields['reference_1_name'].widget.attrs['class'] = self.input_text_css
+        self.fields['reference_1_contact'].widget.attrs['class'] = self.select_input_css
+        self.fields['reference_1_address'].widget.attrs['class'] = self.input_text_css
+        self.fields['reference_1_relationship'].widget.attrs['class'] = self.input_text_css
+        
+        self.fields['reference_2_name'].widget.attrs['class'] = self.input_text_css
+        self.fields['reference_2_contact'].widget.attrs['class'] = self.select_input_css
+        self.fields['reference_2_address'].widget.attrs['class'] = self.input_text_css
+        self.fields['reference_2_relationship'].widget.attrs['class'] = self.input_text_css
+        
+        self.fields['guarantee_1'].widget.attrs['class'] = self.input_text_css
+        self.fields['guarantee_2'].widget.attrs['class'] = self.input_text_css
+        self.fields['guarantee_3'].widget.attrs['class'] = self.input_text_css
         
     
     def clean_phone_number(self):
