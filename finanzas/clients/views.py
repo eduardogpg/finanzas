@@ -5,7 +5,6 @@ from django.shortcuts import get_object_or_404
 from prospects.models import Client
 from prospects.models import Prospect
 
-
 def index(request):
     client = None
     
