@@ -1,0 +1,39 @@
+{% extends 'bases/base.html' %}
+
+
+{% block content %}
+<div class=""> 
+    <section class="py-8">
+    <div class="container px-1 mx-auto">
+        <div class="pt-6 bg-white shadow rounded">
+        <div class="px-6 border-b">
+            <div class="flex flex-wrap items-center mb-6">
+                <h2 class="text-xl font-bold">Busqueda de clientes</h2>
+            </div>
+        </div>
+        <div class="overflow-x-auto">
+            <div class="container px-4 mx-auto mt-5">
+                <div>
+                    <form method="GET">
+                        <div class="flex flex-wrap -mx-4 -mb-4 md:mb-0">
+                            <div class="w-full md:w-10/12 px-4 mb-4 md:mb-0">
+                                <input type="text" class="block w-full px4 py-3 mb-2 text-sm placeholder-gray-500 bg-white border rounded" placeholder="CURP" name="curp">
+                            </div>
+                            <div class="w-full md:w-2/12 px-4 mb-4 md:mb-0">
+                                <input type="submit" value="Buscar" class="cursor-pointer flex items-center py-2 px-4 bg-indigo-500 hover:bg-indigo-600 text-sm font-medium text-white rounded">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                {% if client %}
+                    <div>{% include 'clients/snippets/resume.html' with client=client %}</div>
+                {% endif %}
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
+</div>
+
+{% endblock %}

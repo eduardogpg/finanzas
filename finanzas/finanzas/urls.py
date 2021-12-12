@@ -10,5 +10,6 @@ urlpatterns = [
     path('', index, name='index'),
 
     path('dashboard', dashboard, name='dashboard'), 
-    path('creditos/', include('credits.urls'))
+    path('creditos/', include('credits.urls')),
+    path('clientes/', include('clients.urls')),
 ]

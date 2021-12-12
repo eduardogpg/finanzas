@@ -41,9 +41,13 @@ class Client(models.Model):
     
     @property
     def address(self):
-        return self.project.addresses.first()
+        return self.prospect.addresses.first()
     
 
+    @property
+    def full_name(self):
+        return f'{self.prospect.name} {self.prospect.last_name}'
+    
 class Aval(models.Model):
     prospect = models.OneToOneField(Prospect, on_delete=models.CASCADE, primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)

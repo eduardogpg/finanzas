@@ -44,7 +44,7 @@ def create_entities(form):
             marital_state=form.cleaned_data['marital_state'],
         )
         
-        address = Address.objects.create(
+        Address.objects.create(
             address=form.cleaned_data['address'],
             zip=form.cleaned_data['zip'],
             state=form.cleaned_data['state'],
@@ -68,7 +68,7 @@ def create_entities(form):
             DNI=form.cleaned_data['aval_dni']
         )
         
-        prospect_address = Address.objects.create(
+        Address.objects.create(
             prospect=prospect_aval, 
             address=form.cleaned_data['aval_address'],
             zip=form.cleaned_data['aval_zip'],

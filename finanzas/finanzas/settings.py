@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'prospects',
     'addresses',
     'credits',
-    'guarantees'
+    'guarantees',
+    'clients'
 ]
 
 MIDDLEWARE = [
