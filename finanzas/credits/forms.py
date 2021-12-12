@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
+from credits.models import Credit
 from prospects.models import Client
 from addresses.models import STATES_CHOICES
 
@@ -11,6 +12,12 @@ class NewCreditForm(forms.Form):
     input_text_css = 'block w-full px4 py-3 mb-2 text-sm placeholder-gray-500 bg-white border rounded'
     select_input_css = 'appearance-none block w-full px-4 py-3 mb-2 text-sm placeholder-gray-500 bg-white border rounded'
     
+    # Plazo
+    term = forms.IntegerField(label='Plazo', initial=1,  required=True)
+    weekly = forms.BooleanField(label='Semanal', initial=True,  required=True)
+    visit_day = forms.ChoiceField(label='Día de la visita', choices=Credit.VISIT_DAY.choices, required=True)
+    visit_time = forms.ChoiceField(label='Hora de la visita', choices=Credit.VISIT_TIME.choices, required=True)
+    
     request_amount = forms.CharField(label='Credito Solicitado', max_length=10, required=True, initial=0)
     authorized_amount = forms.CharField(label='Credito Autorizado', max_length=10, required=True, initial=0)
     
@@ -18,7 +25,7 @@ class NewCreditForm(forms.Form):
     last_name = forms.CharField(label='Apellidos', max_length=100, required=True)
     curp = forms.CharField(label='CURP', max_length=18, required=True)
     dni = forms.CharField(label='Clave de elector', max_length=DNI_LENGHT, required=True)
-    phone_number = forms.CharField(label='Número teléfonico', max_length=10, required=True)
+    phone_number = forms.CharField(label='Número teléfonico', max_length=11, required=True)
     
     address = forms.CharField(label='Domicilio (Calle, número)', max_length=100, required=True)
     state = forms.ChoiceField(label='Estado', choices=STATES_CHOICES, required=True)
@@ -26,8 +33,8 @@ class NewCreditForm(forms.Form):
     suburb = forms.CharField(label='Colonia', max_length=100, required=True)
     zip = forms.CharField(label='Código Postal', max_length=10, required=True)
     
-    lat = forms.CharField(label='Latitúd', max_length=10, required=True)
-    long = forms.CharField(label='Longitud', max_length=10, required=True)
+    lat = forms.CharField(label='Latitúd', max_length=10, required=False, initial=-1)
+    long = forms.CharField(label='Longitud', max_length=10, required=False, initial=-1)
     
     marital_state = forms.ChoiceField(label='Estado Civil', choices=Client.MARITAL_STATE_CHOICES.choices, required=True)
     spouse = forms.CharField(label='Nombre del conyugue', max_length=200, required=False)
@@ -45,7 +52,6 @@ class NewCreditForm(forms.Form):
     aval_township = forms.CharField(label='Ciudad', max_length=100, required=True)
     aval_suburb = forms.CharField(label='Colonia', max_length=100, required=True)
     aval_zip = forms.CharField(label='Código Postal', max_length=10, required=True)
-    
     
     reference_1_name = forms.CharField(label='Nombre', max_length=100, required=True)
     reference_1_contact = forms.CharField(label='Contacto', max_length=255, required=True)
@@ -73,6 +79,9 @@ class NewCreditForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(NewCreditForm, self).__init__(*args, **kwargs)
 
+        self.fields['term'].widget.attrs['class'] = self.select_input_css
+        self.fields['visit_day'].widget.attrs['class'] = self.select_input_css
+        self.fields['visit_time'].widget.attrs['class'] = self.select_input_css
         self.fields['request_amount'].widget.attrs['class'] = self.input_text_css
         self.fields['authorized_amount'].widget.attrs['class'] = self.input_text_css
         
@@ -97,7 +106,7 @@ class NewCreditForm(forms.Form):
         self.fields['children'].widget.attrs['class'] = self.input_text_css
         
         self.fields['aval_name'].widget.attrs['class'] = self.input_text_css
-        self.fields['aval_last_name'].widget.attrs['class'] = self.select_input_css
+        self.fields['aval_last_name'].widget.attrs['class'] = self.input_text_css
         self.fields['aval_curp'].widget.attrs['class'] = self.input_text_css
         self.fields['aval_dni'].widget.attrs['class'] = self.input_text_css
         self.fields['aval_phone_number'].widget.attrs['class'] = self.input_text_css

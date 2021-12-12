@@ -3,8 +3,36 @@
     
     <div>
         <p class="text-gray-600 hover:text-blue-700 mt-6 mb-6 text-2xl font-bold">Solicitud de credito</p>
-        {% include 'snippets/input.html' with input=form.request_amount %}
-        {% include 'snippets/input.html' with input=form.authorized_amount %}
+
+        <div class="flex flex-wrap -mx-4 -mb-4 md:mb-0">
+            <div class="w-full md:w-1/2 px-4 mb-4 md:mb-0">
+                <div class="mb-6">
+                    {% include 'snippets/input.html' with input=form.request_amount %}
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 px-4 mb-4 md:mb-0">
+                <div class="mb-6">
+                    {% include 'snippets/input.html' with input=form.authorized_amount %}
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap -mx-4 -mb-4 md:mb-0">
+            <div class="w-full md:w-1/2 px-4 mb-4 md:mb-0">
+                <div class="mb-6">
+                    {% include 'snippets/input.html' with input=form.visit_day %}
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 px-4 mb-4 md:mb-0">
+                <div class="mb-6">
+                    {% include 'snippets/input.html' with input=form.visit_time %}
+                </div>
+            </div>
+        </div>
+
+        {% include 'snippets/input.html' with input=form.term %}
+        {% include 'snippets/input.html' with input=form.weekly %}
+
     </div>
 
     <div class="client mb-5">

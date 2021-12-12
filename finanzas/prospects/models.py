@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 class Prospect(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
     last_name = models.CharField(max_length=200, null=True, blank=True)
-    phone_number = models.IntegerField(null=True, blank=True)
+    phone_number = models.BigIntegerField(null=True, blank=True)
     curp = models.CharField(max_length=18, null=True, blank=True)
     DNI = models.CharField(max_length=50, null=True, blank=True) 
     
@@ -66,6 +66,11 @@ class Client(models.Model):
     @property
     def marital_state_format(self):
         return Client.MARITAL_STATE_CHOICES.choices[self.marital_state][1]
+    
+    
+    @property
+    def credit(self):
+        return self.credits.first()
     
     
 class Aval(models.Model):

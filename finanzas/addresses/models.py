@@ -13,8 +13,8 @@ class Address(models.Model):
     state = models.IntegerField(default=0, null=False, blank=False) # Chiapas
     suburb = models.CharField(max_length=255, null=True, blank=True) # Colonia
     township = models.CharField(max_length=255, null=True, blank=True) # Ciudad/Municipio
-    lat = models.IntegerField(null=True)
-    long = models.IntegerField(null=True)
+    lat = models.IntegerField(null=True, blank=True)
+    long = models.IntegerField(null=True, blank=True)
     
     created_at = models.DateTimeField(auto_now_add=True)
     

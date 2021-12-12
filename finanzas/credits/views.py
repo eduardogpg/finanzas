@@ -57,7 +57,11 @@ def create_entities(form):
         Credit.objects.create(
             client=client,
             request_amount=form.cleaned_data['request_amount'],
-            authorized_amount=form.cleaned_data['authorized_amount']
+            authorized_amount=form.cleaned_data['authorized_amount'],
+            cycle=form.cleaned_data['weekly'],
+            term=form.cleaned_data['term'],
+            visit_day=form.cleaned_data['visit_day'],
+            visit_time=form.cleaned_data['visit_time'],
         )
 
         # Aval

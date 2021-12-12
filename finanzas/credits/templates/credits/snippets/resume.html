@@ -1,0 +1,36 @@
+<div class="flex mb-4 justify-between items-center">
+    <div class="flex items-center">
+      <h4 class="text-sm text-gray-500">Monto de credito solicitado</h4>
+    </div>
+    <span class="text-sm">${{ credit.request_amount }} MXN</span>
+</div>
+<div class="flex mb-4 justify-between items-center">
+    <div class="flex items-center">
+      <h4 class="text-sm text-gray-500">Monto de credito aprobado</h4>
+    </div>
+    <span class="text-sm">${{ credit.authorized_amount }} MXN</span>
+</div>
+<div class="flex mb-4 justify-between items-center">
+    <div class="flex items-center">
+      <h4 class="text-sm text-gray-500">CIclos de visita</h4>
+    </div>
+    <span class="text-sm">Semanal</span>
+</div>
+<div class="flex mb-4 justify-between items-center">
+    <div class="flex items-center">
+      <h4 class="text-sm text-gray-500">Plazo de credito</h4>
+    </div>
+    <span class="text-sm">{{ credit.term }}</span>
+</div>
+<div class="flex mb-4 justify-between items-center">
+    <div class="flex items-center">
+      <h4 class="text-sm text-gray-500">Día de visita</h4>
+    </div>
+    <span class="text-sm">{{ credit.visit_day_format }}</span>
+</div>
+<div class="flex mb-4 justify-between items-center">
+    <div class="flex items-center">
+      <h4 class="text-sm text-gray-500">Hora de visita</h4>
+    </div>
+    <span class="text-sm">{{ credit.visit_time_format }}</span>
+</div>
