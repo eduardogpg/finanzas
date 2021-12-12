@@ -1,5 +1,7 @@
 {% extends 'bases/base.html' %}
 
 {% block content %}
-    
+    {% for client in clients %}
+    {% include 'clients/snippets/resume.html' with client=client %}
+    {% endfor %}
 {% endblock %}
