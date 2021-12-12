@@ -1,0 +1,63 @@
+{% extends 'bases/base.html' %}
+
+{% block content %}
+<section class="py-8">
+    <div class="container px-4 mx-auto">
+      <div class="pt-6 bg-white shadow rounded">
+        <div class="px-6 border-b">
+          <div class="flex flex-wrap items-center mb-6">
+            <h3 class="text-xl font-bold">Administrador de usuarios</h3>
+            <a class="ml-auto flex items-center py-2 px-3 text-xs text-white bg-indigo-500 hover:bg-indigo-600 rounded" href="#">
+              <span>Nuevo usuario</span>
+            </a>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="table-auto w-full">
+            <thead>
+              <tr class="text-xs text-gray-500 text-left">
+                <th class="flex items-center pl-6 py-4 font-medium">
+                  <a class="flex items-center" href="#">
+                    <span>Username</span>
+                  </a>
+                </th>
+                <th class="py-4 font-medium">
+                  <a class="flex items-center" href="#">
+                    <span>Última fecha de actualización</span>
+                  </a>
+                </th>
+                <th class="py-4 font-medium">
+                  <a class="flex items-center" href="#">
+                    <span>Estatus</span>
+                  </a>
+                </th>
+                <th class="py-4 font-medium">
+                    <a class="flex items-center" href="#">
+                      <span>Acciones</span>
+                    </a>
+                  </th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr class="text-xs bg-gray-50">
+                        <td class="flex items-center py-5 px-6 font-medium">
+                            <p>{{ user.username }}</p>
+                        </td>
+                        <td class="font-medium">{{ user.date_joined }}</td>
+                        <td class="font-medium">{{ user.permission_level }}</td>
+                        <td>
+                            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="#">
+                                Editar
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
