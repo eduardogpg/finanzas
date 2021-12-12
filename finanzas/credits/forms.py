@@ -26,6 +26,9 @@ class NewCreditForm(forms.Form):
     suburb = forms.CharField(label='Colonia', max_length=100, required=True)
     zip = forms.CharField(label='Código Postal', max_length=10, required=True)
     
+    lat = forms.CharField(label='Latitúd', max_length=10, required=True)
+    long = forms.CharField(label='Longitud', max_length=10, required=True)
+    
     marital_state = forms.ChoiceField(label='Estado Civil', choices=Client.MARITAL_STATE_CHOICES.choices, required=True)
     spouse = forms.CharField(label='Nombre del conyugue', max_length=200, required=False)
     job = forms.CharField(label='Ocupación', max_length=200, required=True)
@@ -84,6 +87,9 @@ class NewCreditForm(forms.Form):
         self.fields['township'].widget.attrs['class'] = self.input_text_css
         self.fields['suburb'].widget.attrs['class'] = self.input_text_css
         self.fields['zip'].widget.attrs['class'] = self.input_text_css
+        
+        self.fields['lat'].widget.attrs['class'] = self.input_text_css
+        self.fields['long'].widget.attrs['class'] = self.input_text_css
         
         self.fields['marital_state'].widget.attrs['class'] = self.input_text_css
         self.fields['spouse'].widget.attrs['class'] = self.select_input_css

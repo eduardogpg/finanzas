@@ -5,9 +5,8 @@ from django.db import models
 from prospects.models import Client
 
 from django.db.models.signals import pre_save
-
-
 from django.utils.translation import gettext_lazy as _
+
 
 class Credit(models.Model):
     
@@ -38,7 +37,6 @@ class Credit(models.Model):
 def set_uuid(sender, instance, *args, **kwargs):
     if not instance.uuid:
         instance.uuid = str(uuid.uuid4())[:8]
-
 
 
 pre_save.connect(set_uuid, sender=Credit)

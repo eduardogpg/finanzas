@@ -12,14 +12,21 @@ class Prospect(models.Model):
     
     created_at = models.DateTimeField(auto_now_add=True)
     
+    
     def __str__(self):
         return f'{self.name} {self.last_name}'
+    
     
     @property
     def full_name(self):
         return f'{self.name} {self.last_name}'
-    
-    
+
+
+    @property
+    def address(self):
+        return self.addresses.first()
+
+
 class Client(models.Model):
     
     class MARITAL_STATE_CHOICES(models.IntegerChoices):
@@ -27,6 +34,7 @@ class Client(models.Model):
         MARRIED = 1, _('Casado(a)')
         DIVORCED = 2, _('Divorciado(a)')
         ENGAGGED = 3, _('Comprometido(a)')
+
 
     marital_state = models.IntegerField(choices=MARITAL_STATE_CHOICES.choices, default=0, null=False, blank=False) # ENUM # relationship status
     spouse = models.CharField(max_length=200, null=False, blank=False) # Conyugue
@@ -39,18 +47,28 @@ class Client(models.Model):
     def __str__(self):
         return f'{self.prospect.full_name}'
     
+    
     @property
     def address(self):
         return self.prospect.addresses.first()
     
 
     @property
+    def aval(self):
+        return self.avals.first()
+    
+    
+    @property
     def full_name(self):
         return f'{self.prospect.name} {self.prospect.last_name}'
     
+
 class Aval(models.Model):
     prospect = models.OneToOneField(Prospect, on_delete=models.CASCADE, primary_key=True)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='avals')
+    
     created_at = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return f'{self.prospect.full_name}'
@@ -82,5 +100,7 @@ class Reference(models.Model):
     
     objects = ReferenceManager()
     
+    
     def __str__(self):
         return f'{self.prospect.full_name}'
+

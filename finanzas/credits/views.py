@@ -5,14 +5,13 @@ from django.shortcuts import redirect
 
 from .forms import NewCreditForm
 
+from credits.models import Credit
 from addresses.models import Address
 
 from prospects.models import Aval
 from prospects.models import Client
 from prospects.models import Prospect
 from prospects.models import Reference
-
-from credits.models import Credit
 
 from guarantees.models import Guarantee
 
@@ -50,6 +49,8 @@ def create_entities(form):
             state=form.cleaned_data['state'],
             suburb=form.cleaned_data['suburb'],
             township=form.cleaned_data['township'],
+            lat=form.cleaned_data['lat'],
+            long=form.cleaned_data['long'],
             prospect=prospect
         )
 
@@ -65,7 +66,7 @@ def create_entities(form):
             last_name=form.cleaned_data['aval_last_name'],
             phone_number=form.cleaned_data['aval_phone_number'],
             curp=form.cleaned_data['aval_curp'],
-            DNI=form.cleaned_data['aval_dni']
+            DNI=form.cleaned_data['aval_dni'],
         )
         
         Address.objects.create(
@@ -77,7 +78,7 @@ def create_entities(form):
             township=form.cleaned_data['aval_township']
         )
         
-        Aval.objects.create(prospect=prospect_aval)
+        Aval.objects.create(prospect=prospect_aval, client=client)
         
         # Referencias
         Reference.objects.create_reference(client, clean_reference(form, 'reference_1'))

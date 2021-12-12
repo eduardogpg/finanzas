@@ -24,5 +24,5 @@ def detail(request, pk):
     client = get_object_or_404(Client, pk=pk)
     
     return render(request, 'clients/detail.html', {
-        'client': client
+        'client': client,
     })

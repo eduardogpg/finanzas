@@ -12,7 +12,7 @@ class Address(models.Model):
     zip = models.IntegerField(null=True, blank=True)
     state = models.IntegerField(default=0, null=False, blank=False) # Chiapas
     suburb = models.CharField(max_length=255, null=True, blank=True) # Colonia
-    township = models.CharField(max_length=255, null=True, blank=True) # Ciudad
+    township = models.CharField(max_length=255, null=True, blank=True) # Ciudad/Municipio
     lat = models.IntegerField(null=True)
     long = models.IntegerField(null=True)
     
@@ -20,5 +20,3 @@ class Address(models.Model):
     
     def __str__(self):
         return f'#{self.address} - {self.township}'
-    
-    
