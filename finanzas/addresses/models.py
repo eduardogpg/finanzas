@@ -2,8 +2,12 @@ from django.db import models
 
 from prospects.models import Prospect
 
+STATES_CHOICES = [
+    (0, 'Chiapas'),
+]
+
 class Address(models.Model):
-    prospect = models.ForeignKey(Prospect, on_delete=models.CASCADE)
+    prospect = models.ForeignKey(Prospect, on_delete=models.CASCADE, related_name='addresses')
     address = models.CharField(max_length=255, null=False, blank=False)
     zip = models.IntegerField(null=False, blank=False)
     state = models.IntegerField(default=0, null=False, blank=False) # Chiapas

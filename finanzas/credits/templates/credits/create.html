@@ -9,7 +9,7 @@
         <div class="pt-6 bg-white shadow rounded">
         <div class="px-6 border-b">
             <div class="flex flex-wrap items-center mb-6">
-                <h3 class="text-xl font-bold">Nuevo credito</h3>
+                <h2 class="text-xl font-bold">Nuevo credito</h2>
             </div>
         </div>
         <div class="overflow-x-auto">
@@ -18,10 +18,15 @@
                 <form action="#" method="post">
                     
                     {% csrf_token %}
+                    
+                    <div>
+                        <p class="text-gray-600 hover:text-blue-700 mt-6 mb-6 text-lg">Solicitud de credito</p>
+                        {% include 'snippets/input.html' with input=form.request_amount %}
+                        {% include 'snippets/input.html' with input=form.authorized_amount %}
+                    </div>
 
                     <div class="client mb-6">
                         <p class="text-gray-500 hover:text-blue-600 mt-6 mb-6 text-lg">Datos generales del cliente</p>
-
                         <div class="flex flex-wrap -mx-4 -mb-4 md:mb-0">
                             <div class="w-full md:w-1/2 px-4 mb-4 md:mb-0">
                                 <div class="mb-6">
@@ -36,13 +41,43 @@
                         </div>
                         
                         {% include 'snippets/input.html' with input=form.curp %}
-
                         {% include 'snippets/input.html' with input=form.dni %}
-                        
                         {% include 'snippets/input.html' with input=form.phone_number %}
                     </div>
 
-                
+                    <div>
+                        {% include 'snippets/input.html' with input=form.address %}
+                        {% include 'snippets/input.html' with input=form.state %}
+                        {% include 'snippets/input.html' with input=form.township %}
+                        {% include 'snippets/input.html' with input=form.suburb %}
+                        {% include 'snippets/input.html' with input=form.zip %}
+                    </div>
+
+                    <div>
+                        {% include 'snippets/input.html' with input=form.marital_state %}
+                        {% include 'snippets/input.html' with input=form.spouse %}
+                        {% include 'snippets/input.html' with input=form.job %}
+                        {% include 'snippets/input.html' with input=form.children %}
+                    </div>
+
+                    <div class="mt-5 mb-5">
+                        <p class="text-gray-500 hover:text-blue-600 mt-6 mb-6 text-lg">Datos del Aval</p>
+
+                        {% include 'snippets/input.html' with input=form.aval_name %}
+                        {% include 'snippets/input.html' with input=form.aval_last_name %}
+                        {% include 'snippets/input.html' with input=form.aval_curp %}
+                        {% include 'snippets/input.html' with input=form.aval_dni %}
+                        {% include 'snippets/input.html' with input=form.aval_phone_number %}
+                    </div>
+
+                    <div>
+                        {% include 'snippets/input.html' with input=form.aval_address %}
+                        {% include 'snippets/input.html' with input=form.aval_state %}
+                        {% include 'snippets/input.html' with input=form.aval_township %}
+                        {% include 'snippets/input.html' with input=form.aval_suburb %}
+                        {% include 'snippets/input.html' with input=form.aval_zip %}
+                    </div>
+
                     <div class="mt-6 mb-6">
                         <input type="submit" value="Crear nueva solicitud" class="cursor-pointer flex items-center py-2 px-4 bg-indigo-500 hover:bg-indigo-600 text-sm font-medium text-white rounded">
                     </div>
