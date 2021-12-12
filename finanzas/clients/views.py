@@ -6,19 +6,16 @@ from prospects.models import Client
 from prospects.models import Prospect
 
 def index(request):
-    client = None
+    context = { 'title': 'Busqueda de clientes' }
     
     if request.method == 'GET' and request.GET.get('curp'):
-        prospect = Prospect.objects.filter(curp=request.GET['curp']).first()
+        client = Client.objects.filter(prospect__curp=request.GET['curp']).first()
         
-        if prospect and prospect.client:
-            client = prospect.client
+        if client and client.credit:
+            context['client'] = client
 
-    return render(request, 'clients/index.html', {
-        'title': 'Busqueda de clientes',
-        'client': client
-    })
-
+    return render(request, 'clients/index.html', context)
+            
 
 def detail(request, pk):
     client = get_object_or_404(Client, pk=pk)
