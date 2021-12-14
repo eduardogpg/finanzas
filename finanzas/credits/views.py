@@ -1,5 +1,7 @@
 from django.db import transaction
 
+from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render
 from django.shortcuts import redirect
 
@@ -96,6 +98,7 @@ def create_entities(form):
         return client
     
 
+@login_required(login_url='login')
 def create(request):
     form = NewCreditForm(request.POST or None)
     

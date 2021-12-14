@@ -28,7 +28,7 @@
                 </th>
                 <th class="py-4 font-medium">
                   <a class="flex items-center" href="#">
-                    <span>Estatus</span>
+                    <span>Activo</span>
                   </a>
                 </th>
                 <th class="py-4 font-medium">
@@ -44,8 +44,20 @@
                         <td class="flex items-center py-5 px-6 font-medium">
                             <p>{{ user.username }}</p>
                         </td>
-                        <td class="font-medium">{{ user.date_joined }}</td>
-                        <td class="font-medium">{{ user.permission_level }}</td>
+                        <td class="font-medium">
+                          	{% if user.last_login_at  %}
+	                            {{ user.last_login_at }} <!-- Curstome Tag -->
+                            {% else %}
+                              El usuario no se ha autenticado aún.
+                            {% endif %}
+                        </td>
+                        <td class="font-medium">
+							{% if user.active  %}
+								Cuenta activa
+							{% else %}
+						  		Cuenta desactivada
+							{% endif %}
+                        </td>
                         <td>
                             <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{% url 'users:update' pk=user.id %}">
                                 Editar

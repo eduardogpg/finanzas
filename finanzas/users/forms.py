@@ -1,18 +1,33 @@
-from django.forms import ModelForm
-from django.forms import TextInput
-
+from django import forms
 from .models import User
 
-class UserForm(ModelForm):
+class UserForm(forms.Form):
     select_input_css = 'appearance-none block w-full px-4 py-3 mb-2 text-sm placeholder-gray-500 bg-white border rounded'
     
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'password', 'is_active', 'is_superuser')
-        widgets={
-            'password':TextInput(attrs={'type':'password'})
-        }
-        
+    username = forms.CharField(
+        min_length=4, max_length=50,
+        required=True,
+        widget=forms.TextInput(attrs={
+        'class': 'form-control', 'id': 'username'
+    }))
+    
+    email = forms.CharField(
+        min_length=4, max_length=50,
+        required=True,
+        widget=forms.TextInput(attrs={
+        'class': 'form-control', 'id': 'email'
+    }))
+
+    password = forms.CharField(
+        label='Password',
+        required=False,
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control', 'id': 'password'
+    }))
+    
+    active = forms.BooleanField(initial=True, required=False)
+    is_superuser = forms.BooleanField(initial=True, required=False)
+
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
         
@@ -24,5 +39,6 @@ class UserForm(ModelForm):
         self.fields['email'].label = "Email"
         self.fields['password'].label = "Password"
         
-        self.fields['is_active'].label = "Activo"
-        self.fields['is_superuser'].label = "Administrador"
+        self.fields['active'].label = "Estatus activo"
+        self.fields['is_superuser'].label = "Administrador" # Tipos
+

@@ -6,7 +6,9 @@ from django.shortcuts import get_object_or_404
 from users.models import User
 from .forms import UserForm
 
+from .decorators import only_admins
 
+@only_admins
 def index(request):
     context = {
         'users': User.objects.all(),
@@ -15,12 +17,19 @@ def index(request):
 
     return render(request, 'users/index.html', context)
 
-
+@only_admins
 def create(request):
     form =  UserForm(request.POST or None)
     
     if request.method == 'POST' and form.is_valid():
-        user = form.save()
+        user = User.objects.create_user(
+            username=form.cleaned_data['username'],
+            email=form.cleaned_data['email'],
+            password=form.cleaned_data['password'],
+            active=form.cleaned_data['active'],
+            is_superuser=form.cleaned_data['is_superuser']
+        )
+        
         return redirect('users:index')
     
     context = {
@@ -30,23 +39,28 @@ def create(request):
     
     return render(request, 'users/create.html', context)
 
-
+@only_admins
 def update(request, pk):
     user = get_object_or_404(User, pk=pk)
-    form =  UserForm(instance=user)
+    form = UserForm(initial={
+        'username': user.username, 'email': user.email, 'active': user.active, 'is_superuser': user.is_superuser 
+    })
     
     if request.method == 'POST':
         form = UserForm(request.POST)
         
         if form.is_valid():
+            
+            if form.cleaned_data['password']:
+                user.set_password(form.cleaned_data['password'])
+            
             user.username = form.cleaned_data['username']
-            user.password = form.cleaned_data['password']
-            user.is_active = form.cleaned_data['is_active']
+            user.active = form.cleaned_data['active']
             user.is_superuser = form.cleaned_data['is_superuser']
             
             user.save()
             
-            return redirect('users:index')
+        return redirect('users:index')
     
     context = {
         'title': 'Nuevo usuario',

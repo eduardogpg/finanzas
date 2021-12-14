@@ -11,6 +11,9 @@ from prospects.models import Client
 
 from .forms import LoginForm
 
+from django.contrib.auth.decorators import login_required
+
+@login_required(login_url='login')
 def dashboard(request):
     context = {
         'title' :'Finanzas del sur',
@@ -27,10 +30,15 @@ def login(request):
     form = LoginForm(request.POST or None)
     
     if request.method == 'POST' and form.is_valid():
-        user = authenticate(username=form.data['username'], password=form.data['password'])
+        user = authenticate(
+            username=form.data['username'],
+            password=form.data['password']
+        )
         
-        if user:
+        if user and user.is_active:
             django_login(request, user)
+            user.authenticate_now()
+            
             return redirect('dashboard')
     
     if request.method == 'POST':
