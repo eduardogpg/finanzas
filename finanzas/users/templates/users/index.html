@@ -16,42 +16,34 @@
           <table class="table-auto w-full">
             <thead>
               <tr class="text-xs text-gray-500 text-left">
-                <th class="flex items-center pl-6 py-4 font-medium">
-                  <a class="flex items-center" href="#">
-                    <span>Username</span>
-                  </a>
+                <th class="flex items-center pl-6 py-4 font-bold">
+                  <span>Username</span>
                 </th>
-                <th class="py-4 font-medium">
-                  <a class="flex items-center" href="#">
-                    <span>Última fecha de actualización</span>
-                  </a>
+                <th class="py-4 font-bold">
+                  <span>Última fecha de actualización</span>
                 </th>
-                <th class="py-4 font-medium">
-                  <a class="flex items-center" href="#">
-                    <span>Activo</span>
-                  </a>
+                <th class="py-4 font-bold">
+                  <span>Activo</span>
                 </th>
-                <th class="py-4 font-medium">
-                    <a class="flex items-center" href="#">
-                      <span>Acciones</span>
-                    </a>
-                  </th>
+                <th class="py-4 font-bold">
+                  <span>Acciones</span>
+                </th>
               </tr>
             </thead>
             <tbody>
                 {% for user in users %}
                     <tr class="text-xs">
-                        <td class="flex items-center py-5 px-6 font-medium">
+                        <td class="flex items-center py-5 px-6 ">
                             <p>{{ user.username }}</p>
                         </td>
-                        <td class="font-medium">
+                        <td class="">
                           	{% if user.last_login_at  %}
 	                            {{ user.last_login_at }} <!-- Curstome Tag -->
                             {% else %}
                               El usuario no se ha autenticado aún.
                             {% endif %}
                         </td>
-                        <td class="font-medium">
+                        <td class="">
 							{% if user.active  %}
 								Cuenta activa
 							{% else %}

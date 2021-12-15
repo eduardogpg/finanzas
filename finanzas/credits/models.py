@@ -7,6 +7,8 @@ from prospects.models import Client
 from django.db.models.signals import pre_save
 from django.utils.translation import gettext_lazy as _
 
+from users.models import User
+
 class Credit(models.Model):
     
     class STATE(models.IntegerChoices):
@@ -58,6 +60,8 @@ class Credit(models.Model):
     visit_time = models.IntegerField(default=0, choices=VISIT_TIME.choices, null=False, blank=False) # Hola de la visita
     
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.uuid}'

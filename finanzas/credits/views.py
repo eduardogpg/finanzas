@@ -25,7 +25,7 @@ def clean_reference(form, reference):
         'relationship':form.cleaned_data[f'{reference}_relationship'],
     }
 
-def create_entities(form):
+def create_entities(form, user):
     prospect = Prospect(
         name=form.cleaned_data['name'],
         last_name=form.cleaned_data['last_name'],
@@ -64,6 +64,7 @@ def create_entities(form):
             term=form.cleaned_data['term'],
             visit_day=form.cleaned_data['visit_day'],
             visit_time=form.cleaned_data['visit_time'],
+            user=user,
         )
 
         # Aval
@@ -103,7 +104,7 @@ def create(request):
     form = NewCreditForm(request.POST or None)
     
     if request.method == 'POST' and form.is_valid():
-        if create_entities(form):
+        if create_entities(form, request.user):
             return redirect('index')
     
 

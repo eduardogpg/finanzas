@@ -35,7 +35,7 @@ def login(request):
             password=form.data['password']
         )
         
-        if user and user.is_active:
+        if user and user.active:
             django_login(request, user)
             user.authenticate_now()
             

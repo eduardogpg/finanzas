@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 
 from credits.models import Credit
 from prospects.models import Client
-from addresses.models import STATES_CHOICES
+from addresses.models import Address
 
 DNI_LENGHT = 18
 
@@ -28,8 +28,8 @@ class NewCreditForm(forms.Form):
     phone_number = forms.CharField(label='Número teléfonico', max_length=11, required=True)
     
     address = forms.CharField(label='Domicilio (Calle, número)', max_length=100, required=True)
-    state = forms.ChoiceField(label='Estado', choices=STATES_CHOICES, required=True)
-    township = forms.CharField(label='Ciudad', max_length=100, required=True)
+    state = forms.ChoiceField(label='Estado', choices=Address.STATES.choices, required=True)
+    township = forms.ChoiceField(label='Ciudad', choices=Address.TOWNSHIPS.choices, required=True)
     suburb = forms.CharField(label='Colonia', max_length=100, required=True)
     zip = forms.CharField(label='Código Postal', max_length=10, required=True)
     
@@ -48,8 +48,8 @@ class NewCreditForm(forms.Form):
     aval_phone_number = forms.CharField(label='Número teléfonico', max_length=10, required=True)
     
     aval_address = forms.CharField(label='Domicilio (Calle, número)', max_length=100, required=True)
-    aval_state = forms.ChoiceField(label='Estado', choices=STATES_CHOICES, required=True)
-    aval_township = forms.CharField(label='Ciudad', max_length=100, required=True)
+    aval_state = forms.ChoiceField(label='Estado', choices=Address.STATES.choices, required=True)
+    aval_township = forms.ChoiceField(label='Ciudad', choices=Address.TOWNSHIPS.choices, required=True)
     aval_suburb = forms.CharField(label='Colonia', max_length=100, required=True)
     aval_zip = forms.CharField(label='Código Postal', max_length=10, required=True)
     
