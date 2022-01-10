@@ -2,9 +2,8 @@
 
 {% block content %}
 
-<section>
-    {% include 'folders/snippets/new.html' %}
-</section>
+<script src="//unpkg.com/alpinejs" defer></script>
+
 
 <section class="py-8">
     <div class="container px-4 mx-auto">
@@ -12,9 +11,15 @@
         <div class="px-6 border-b">
           <div class="flex flex-wrap items-center mb-6">
             <h3 class="text-xl font-bold">Últimas carpetas</h3>
-            <a class="ml-auto flex items-center py-2 px-3 text-xs text-white bg-indigo-500 hover:bg-indigo-600 rounded" href="#">
-              <span>Nueva carpeta</span>
-            </a>
+
+            <div x-data="{ open: false }">
+                <button @click="open = true" class="ml-auto flex items-center py-2 px-3 text-xs text-white bg-indigo-500 hover:bg-indigo-600 rounded">Nueva carpeta</button>
+             
+                <span x-show="open">
+                    {% include 'folders/snippets/new.html' %}
+                </span>
+            </div>
+
           </div>
         </div>
         <div class="overflow-x-auto">
