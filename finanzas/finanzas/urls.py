@@ -19,4 +19,5 @@ urlpatterns = [
     path('creditos/', include('credits.urls')),
     path('clientes/', include('clients.urls')),
     path('usuarios/', include('users.urls')),
+    path('carpetas/', include('folders.urls')),
 ]

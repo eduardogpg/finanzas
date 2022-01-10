@@ -1,0 +1,66 @@
+{% extends 'bases/base.html' %}
+
+{% block content %}
+
+<section>
+    {% include 'folders/snippets/new.html' %}
+</section>
+
+<section class="py-8">
+    <div class="container px-4 mx-auto">
+      <div class="pt-6 bg-white shadow rounded">
+        <div class="px-6 border-b">
+          <div class="flex flex-wrap items-center mb-6">
+            <h3 class="text-xl font-bold">Últimas carpetas</h3>
+            <a class="ml-auto flex items-center py-2 px-3 text-xs text-white bg-indigo-500 hover:bg-indigo-600 rounded" href="#">
+              <span>Nueva carpeta</span>
+            </a>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="table-auto w-full">
+            <thead>
+              <tr class="text-xs text-gray-500 text-left">
+                <th class="flex items-center pl-6 py-4 font-medium">
+                  <a class="flex items-center" href="#">
+                    <span>Nombre</span>
+                  </a>
+                </th>
+                <th class="py-4 font-medium">
+                  <a class="flex items-center" href="#">
+                    <span>Fecha de creación</span>
+                  </a>
+                </th>
+                <th class="py-4 font-medium">
+                  <a class="flex items-center" href="#">
+                    <span>Cantidad de Grupos</span>
+                  </a>
+                </th>
+                <th class="py-4 font-medium">
+                  <a class="flex items-center" href="#">
+                    <span>Cantidad de Prestamos</span>
+                  </a>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for folder in object_list %}
+                    <tr class="text-xs bg-gray-50">
+                        <td class="flex items-center py-5 px-6 font-medium">
+                            <p>{{ folder.name }}</p>
+                        </td>
+                        <td class="font-medium">{{ folder.created_at }}</td>
+                        <td class="font-medium">{{ folder.groups }}</td>
+                        <td>
+                            {{ folder.credits }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

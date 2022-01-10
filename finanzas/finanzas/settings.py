@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'credits',
     'guarantees',
     'clients',
+    'folders',
+    'groups'
 ]
 
 MIDDLEWARE = [

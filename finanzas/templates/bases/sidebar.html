@@ -33,6 +33,16 @@
                 <span>Dashboard</span>
               </a>
             </li>
+
+            <li>
+              <a class="flex items-center pl-3 py-3 pr-4 text-gray-50 {% if '/carpetas' in request.path %}bg-indigo-500{% else %}hover:bg-gray-900{% endif %} rounded" href="{% url 'folders:list' %}">
+                <span class="inline-block mr-3">
+                </span>
+                <span>Carpetas</span>
+              </a>
+            </li>
+
+
             <li>
               <a class="flex items-center pl-3 py-3 pr-4 text-gray-50 {% if '/clientes' in request.path %}bg-indigo-500{% else %}hover:bg-gray-900{% endif %} rounded" href="{% url 'clients:index' %}">
                 <span class="inline-block mr-3">
