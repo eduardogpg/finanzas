@@ -19,7 +19,7 @@
       </div>
 
       <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-        <button @click="open = false" type="button" id="create" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
+        <button onclick="clearForm()" type="button" id="create" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
           Cerrar
         </button>
         
@@ -28,14 +28,16 @@
   </div>
 </div>
 
-
 <script>
-  const button = document.getElementById('create')
+  const button = document.getElementById('create');
   const url = document.getElementById('form').action;
+  const modal = document.getElementById('modal');
+
+  const input = document.getElementById('modal');
 
   button.addEventListener('click', function(e){
 
-      var data = {'name': document.getElementById('name').value  };
+      var data = {'name': input.value  };
 
       fetch(url, {
         method: 'POST', 
@@ -44,9 +46,16 @@
           'Content-Type': 'application/json'
         }
       }).then(response => response.json())
-      .then(data => console.log(data));
+      .then(function(data){
+        modal.style = "display: none;"
+      });
 
   });
+
+  function clearForm(){
+    input.value = '';
+    modal.style = "display: none;"
+  }
 
 </script>
 
