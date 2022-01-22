@@ -1,5 +1,7 @@
 import json
 
+from django.urls import reverse
+
 from django.http import JsonResponse
 from django.views.generic.list import ListView
 from django.views.decorators.csrf import csrf_exempt
@@ -14,6 +16,9 @@ class FolderListView(ListView):
         context = super().get_context_data(**kwargs)
         return context
     
+    def get_queryset(self):
+        return Folder.objects.all().order_by('-id')
+    
 
 @csrf_exempt
 def create(request):
@@ -25,5 +30,6 @@ def create(request):
         
         response['id'] = folder.id
         response['name'] = folder.name
+        response['next_url'] = reverse('folders:list')
         
     return JsonResponse(response)

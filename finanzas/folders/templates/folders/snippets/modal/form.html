@@ -8,7 +8,7 @@
               </button>
           </div>
 
-          <form class="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8" action="#">
+          <form id="form" class="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8" action="{% url 'folders:create' %}">
               <div>
                   <input type="name" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Nombre de la carpeta" required>
               </div>
@@ -18,3 +18,32 @@
       </div>
   </div>
 </div> 
+
+<script>
+
+  document.getElementById('form').addEventListener('submit', function(event){
+    event.preventDefault();
+    
+    const form = event.target;
+    const userInputField = form.elements['userInput'];
+
+    const name = form.elements['name'];
+    
+    fetch(form.action, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({name: name.value })
+      }).then(res => res.json())
+      .then(function(response){
+        
+        next_url = response['next_url'];
+        window.location.href = next_url;
+
+      });
+
+  ;})
+
+</script>
