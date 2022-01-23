@@ -8,7 +8,9 @@ from django.db.models.signals import pre_save
 from django.utils.translation import gettext_lazy as _
 
 from users.models import User
+
 from groups.models import Group
+from folders.models import Folder
 
 class Credit(models.Model):
     
@@ -46,11 +48,13 @@ class Credit(models.Model):
         NINETEEN = 19, _('19:00 PM')
         TWENTY = 29, _('20:00 PM')
         
-
-    folder = models.CharField(max_length=100, null=False, blank=False, default='Finanzas del sur')
+    
     uuid = models.CharField(max_length=50, null=False, blank=False)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='credits', null=True, blank=True)
+    
     group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='credits', null=True, blank=True)
+    folder = models.ForeignKey(Folder, on_delete=models.CASCADE, related_name='credits', null=True, blank=True)
+    
     request_amount = models.IntegerField(default=0, null=False, blank=False) #Cents?
     authorized_amount = models.IntegerField(default=0, null=False, blank=False) #Cents?
     state = models.IntegerField(default=STATE.CREATED, choices=STATE.choices) # CREATED

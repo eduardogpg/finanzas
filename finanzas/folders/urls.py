@@ -4,7 +4,6 @@ from django.urls import include
 from .views import create
 from .views import FolderListView
 
-
 app_name = 'folders'
 
 urlpatterns = [
