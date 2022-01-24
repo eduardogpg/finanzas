@@ -13,6 +13,9 @@ class NewCreditForm(forms.Form):
     select_input_css = 'appearance-none block w-full px-4 py-3 mb-2 text-sm placeholder-gray-500 bg-white border rounded'
     
     # Plazo
+    folder = forms.CharField(label='Folder', required=True)
+    group = forms.CharField(label='Grupo', required=True)
+    
     term = forms.IntegerField(label='Plazo', initial=1,  required=True)
     weekly = forms.BooleanField(label='Semanal', initial=True,  required=True)
     visit_day = forms.ChoiceField(label='Día de la visita', choices=Credit.VISIT_DAY.choices, required=True)
@@ -79,6 +82,11 @@ class NewCreditForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(NewCreditForm, self).__init__(*args, **kwargs)
 
+        self.fields['folder'].widget.attrs['class'] = self.select_input_css
+        self.fields['group'].widget.attrs['class'] = self.select_input_css
+        
+        self.fields['folder'].widget.attrs['disbaled'] = True
+        
         self.fields['term'].widget.attrs['class'] = self.select_input_css
         self.fields['visit_day'].widget.attrs['class'] = self.select_input_css
         self.fields['visit_time'].widget.attrs['class'] = self.select_input_css
@@ -117,7 +125,6 @@ class NewCreditForm(forms.Form):
         self.fields['aval_suburb'].widget.attrs['class'] = self.input_text_css
         self.fields['aval_zip'].widget.attrs['class'] = self.input_text_css
         
-        
         self.fields['reference_1_name'].widget.attrs['class'] = self.input_text_css
         self.fields['reference_1_contact'].widget.attrs['class'] = self.select_input_css
         self.fields['reference_1_address'].widget.attrs['class'] = self.input_text_css
@@ -132,7 +139,6 @@ class NewCreditForm(forms.Form):
         self.fields['guarantee_2'].widget.attrs['class'] = self.input_text_css
         self.fields['guarantee_3'].widget.attrs['class'] = self.input_text_css
         
-    
     def clean_phone_number(self):
         data = self.cleaned_data['phone_number']
         return self.phone_number_validator(data)

@@ -110,7 +110,12 @@ def create(request, pk, group_pk):
     folder = get_object_or_404(Folder, pk=pk)
     group = get_object_or_404(Group, pk=group_pk)
     
-    form = NewCreditForm(request.POST or None)
+    initial = {
+        'folder': folder.name,
+        'group': group.name,
+    }
+    
+    form = NewCreditForm(request.POST or None, initial=initial)
     
     if request.method == 'POST' and form.is_valid():
         if create_entities(form, request.user, folder, group):

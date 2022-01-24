@@ -7,6 +7,21 @@
         <div class="flex flex-wrap -mx-4 -mb-4 md:mb-0">
             <div class="w-full md:w-1/2 px-4 mb-4 md:mb-0">
                 <div class="mb-6">
+                    {% include 'snippets/input.html' with input=form.folder disable=True %}
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 px-4 mb-4 md:mb-0">
+                <div class="mb-6">
+                    {% include 'snippets/input.html' with input=form.group disable=True %}
+                </div>
+            </div>
+        </div>
+
+        <hr class="mb-4">
+
+        <div class="flex flex-wrap -mx-4 -mb-4 md:mb-0">
+            <div class="w-full md:w-1/2 px-4 mb-4 md:mb-0">
+                <div class="mb-6">
                     {% include 'snippets/input.html' with input=form.request_amount %}
                 </div>
             </div>
