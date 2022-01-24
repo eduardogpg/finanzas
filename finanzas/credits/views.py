@@ -132,15 +132,12 @@ def create(request, pk, group_pk):
     })
     
     
-    
 def filter(request):
     response = dict()
     
     if request.method == 'GET' and ( request.GET.get('pay') or request.GET.get('visit')):
         
-        if request.GET.get('pay'):
-            credits = Credit.objects.pay_day_today()
-        
-        response['credits'] = [  {'id': credit.id for credit in credits}  ]
+        credits = Credit.objects.pay_day_today() if request.GET.get('pay') else Credit.objects.visit_day_today()
+        response['credits'] = [  {'id': credit.id for credit in Credit.objects.pay_day_today()} ]
 
     return JsonResponse(response)

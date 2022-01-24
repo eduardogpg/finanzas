@@ -64,13 +64,13 @@
       
       var value = select.options[event.target.selectedIndex].value;
       
-      fetch(input.value + '?pay=1', {
+      var query = (value == 1) ? '?pay=true' : '?day=true';
+
+      fetch(input.value + query, {
         method: 'GET',
         }).then(res => res.json())
         .then(function(response){
-          
           console.log(response);
-  
       });
 
     });

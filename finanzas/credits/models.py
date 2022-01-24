@@ -20,8 +20,19 @@ from folders.models import Folder
 class CreditManager(models.Manager):
     
     def pay_day_today(self):
-        return self.all()
+        now = timezone.now() + timedelta(days=7)
+        
+        return self.filter(next_pay_day__year=now.year,
+                           next_pay_day__month=now.month,
+                           next_pay_day__day=now.day).order_by('-id')
 
+
+    def pay_day_today(self):
+        now = timezone.now()
+        
+        return self.filter(next_visit_day__year=now.year,
+                           next_visit_day__month=now.month,
+                           next_visit_day__day=now.day).order_by('-id')
 
 class Credit(models.Model):
     
@@ -81,6 +92,7 @@ class Credit(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     next_pay_day = models.DateField(null=True, blank=True, default=None)
+    next_visit_day = models.DateField(null=True, blank=True, default=None)
 
     objects = CreditManager()
 
@@ -112,5 +124,13 @@ def set_next_pay_day(sender, instance, created, raw, using, update_fields, *args
         instance.save()
 
 
+def set_next_visit_day(sender, instance, created, raw, using, update_fields, *args, **kwargs):
+    if created and instance.next_visit_day is None:
+        instance.next_visit_day = timezone.now()
+        instance.save()
+        
+
 pre_save.connect(set_uuid, sender=Credit)
+
 post_save.connect(set_next_pay_day, sender=Credit)
+post_save.connect(set_next_visit_day, sender=Credit)
