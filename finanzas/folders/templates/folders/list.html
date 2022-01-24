@@ -9,6 +9,24 @@
     <div class="flex flex-wrap -mx-4">
       <div class="w-full lg:w-3/3 px-4 mb-8 lg:mb-0">
         <div class="px-6 pb-6 pt-4 bg-white shadow rounded">
+
+          <div class="mb-6">
+            <div class="relative">
+              <input type="hidden" value="{% url 'credits:filter' %}" id="url">
+
+              <select class="appearance-none block w-full px-4 py-3 mb-2 text-sm placeholder-gray-500 bg-white border rounded" name="filter" id="filter">
+                <option value="0">Seleccionar Filtro</option>
+                <option value="1">Día de Pago</option>
+                <option value="2">Día de visita</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+
           <div class="flex flex-wrap items-center mb-3">
             <div>
               <div class="flex items-center">
@@ -34,6 +52,28 @@
     </div>
   </div>
 </section>
+{% endblock %}
 
 
+{% block javascript %}
+<script>
+    const select = document.getElementById('filter');
+    const input = document.getElementById('url');
+    
+    select.addEventListener('change', function(event){
+      
+      var value = select.options[event.target.selectedIndex].value;
+      
+      fetch(input.value + '?pay=1', {
+        method: 'GET',
+        }).then(res => res.json())
+        .then(function(response){
+          
+          console.log(response);
+  
+      });
+
+    });
+
+</script>
 {% endblock %}

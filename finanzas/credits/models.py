@@ -1,16 +1,27 @@
 import uuid
 from enum import IntEnum
 
+from datetime import timedelta
+from django.utils import timezone
+
 from django.db import models
 from prospects.models import Client
 
 from django.db.models.signals import pre_save
+from django.db.models.signals import post_save
+
 from django.utils.translation import gettext_lazy as _
 
 from users.models import User
 
 from groups.models import Group
 from folders.models import Folder
+
+class CreditManager(models.Manager):
+    
+    def pay_day_today(self):
+        return self.all()
+
 
 class Credit(models.Model):
     
@@ -68,6 +79,10 @@ class Credit(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+    next_pay_day = models.DateField(null=True, blank=True, default=None)
+
+    objects = CreditManager()
 
     def __str__(self):
         return f'{self.uuid}'
@@ -91,4 +106,11 @@ def set_uuid(sender, instance, *args, **kwargs):
         instance.uuid = str(uuid.uuid4())[:8]
 
 
+def set_next_pay_day(sender, instance, created, raw, using, update_fields, *args, **kwargs):
+    if created and instance.next_pay_day is None:
+        instance.next_pay_day = timezone.now() + timedelta(days=7)
+        instance.save()
+
+
 pre_save.connect(set_uuid, sender=Credit)
+post_save.connect(set_next_pay_day, sender=Credit)

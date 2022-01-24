@@ -16,7 +16,7 @@ urlpatterns = [
     path('logout', logout, name='logout'),
 
     path('dashboard', dashboard, name='dashboard'), 
-    # path('creditos/', include('credits.urls')),
+    path('creditos/', include('credits.urls')),
     path('clientes/', include('clients.urls')),
     path('usuarios/', include('users.urls')),
     path('carpetas/', include('folders.urls')),

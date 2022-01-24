@@ -1,3 +1,5 @@
+from django.http import JsonResponse
+
 from django.db import transaction
 
 from django.contrib.auth.decorators import login_required
@@ -128,3 +130,17 @@ def create(request, pk, group_pk):
         'group': group,
         'title':'Nuevo credito'
     })
+    
+    
+    
+def filter(request):
+    response = dict()
+    
+    if request.method == 'GET' and ( request.GET.get('pay') or request.GET.get('visit')):
+        
+        if request.GET.get('pay'):
+            credits = Credit.objects.pay_day_today()
+        
+        response['credits'] = [  {'id': credit.id for credit in credits}  ]
+
+    return JsonResponse(response)
