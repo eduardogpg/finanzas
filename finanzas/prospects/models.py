@@ -35,6 +35,9 @@ class Client(models.Model):
         MARRIED = 1, _('Casado(a)')
         DIVORCED = 2, _('Divorciado(a)')
         ENGAGGED = 3, _('Comprometido(a)')
+        SINGLE_FATHER = 4, _('Padre Soltero(a)')
+        WINDOWER = 5, _('Viudo(a)')
+        FREE_UNION = 6, _('Unión Libre)')
 
 
     marital_state = models.IntegerField(choices=MARITAL_STATE_CHOICES.choices, default=0, null=False, blank=False) # ENUM # relationship status

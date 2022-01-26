@@ -82,10 +82,11 @@ class NewCreditForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(NewCreditForm, self).__init__(*args, **kwargs)
 
-        self.fields['folder'].widget.attrs['class'] = self.select_input_css
-        self.fields['group'].widget.attrs['class'] = self.select_input_css
+        self.fields['folder'].widget.attrs['class'] =  'disabled:opacity-75 block w-full px4 py-3 mb-2 text-sm border rounded'
+        self.fields['group'].widget.attrs['class'] =  'disabled:opacity-75 block w-full px4 py-3 mb-2 text-sm border rounded'
         
-        self.fields['folder'].widget.attrs['disbaled'] = True
+        self.fields['folder'].widget.attrs['disabled'] = True
+        self.fields['group'].widget.attrs['disabled'] = True
         
         self.fields['term'].widget.attrs['class'] = self.select_input_css
         self.fields['visit_day'].widget.attrs['class'] = self.select_input_css
