@@ -1,3 +1,5 @@
+{% load client_extras %}
+
 <div class="w-full p-4">
     <div class="relative p-6 bg-slate-50 shadow rounded">
       <h3 class="text-left font-bold text-xl">Cliente: {{ credit.client.full_name }}</h3>
@@ -15,7 +17,9 @@
               <div class="flex items-center">
               <h4 class="text-sm text-gray-500">Fecha del siguiente cobro</h4>
             </div>
-              <span>{{ credit.next_pay_day }}</span>
+                {% if credit.next_pay_day %}
+                    <span>{{ credit.next_pay_day|date_format }}</span>
+                {% endif %}
           </p>
       </div>
       <div class="mt-4 mb-4">
@@ -23,7 +27,9 @@
               <div class="flex items-center">
               <h4 class="text-sm text-gray-500">Fecha de la siguiente visita</h4>
             </div>
-              <span>{{ credit.next_visit_day }}</span>
+              {% if credit.next_visit %}
+                <span>{{ credit.next_visit_day|date_format }}</span>
+              {% endif %}
           </p>
       </div>
   
