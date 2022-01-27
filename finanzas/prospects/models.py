@@ -72,14 +72,22 @@ class Client(models.Model):
         return Client.MARITAL_STATE_CHOICES.choices[self.marital_state][1]
     
     
+    
     @property
     def credit(self):
         return self.credits.first()
     
     
     @property
-    def credit(self):
-        return self.credits.first()
+    def lat(self):
+        # return self.prospect.address.lat    
+        return 16.781174
+    
+    
+    @property
+    def long(self):
+        # return self.prospect.address.long
+        return -93.098344
     
     
 class Aval(models.Model):

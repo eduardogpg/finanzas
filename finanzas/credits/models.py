@@ -113,6 +113,7 @@ class Credit(models.Model):
         return ''
     
     
+    
 def set_uuid(sender, instance, *args, **kwargs):
     if not instance.uuid:
         instance.uuid = str(uuid.uuid4())[:8]

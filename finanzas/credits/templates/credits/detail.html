@@ -1,6 +1,14 @@
 {% extends 'bases/base.html' %}
 
 {% block content %}
+<style>
+    #map {
+        height: 100%;
+    }
+</style>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
 <section class="py-8">
     <div class="container px-4 mx-auto">
         
@@ -80,30 +88,76 @@
         </div>
 
         <div class="flex flex-wrap -m-4">
-        <div class="w-full p-4">
-            <div class="p-6 bg-white shadow rounded">
-            <div class="flex justify-between mb-4">
-                <div class="flex items-center">
-                <div>
-                    <div class="flex mb-2">
-                    <h3 class="font-bold">Garantias</h3>
+            <div class="w-full p-4">
+                <div class="p-6 bg-white shadow rounded">
+                <div class="flex justify-between mb-4">
+                    <div class="flex items-center">
+                    <div>
+                        <div class="flex mb-2">
+                        <h3 class="font-bold">Garantias</h3>
+                        </div>
+                    </div>
                     </div>
                 </div>
+                <ul>
+                    {% for guarantee in client.guarantees.all %}
+                    <li>
+                        <div class="flex mb-4 justify-between items-center">
+                        <p class="text-sm">{{ guarantee.description }}</span>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
                 </div>
             </div>
-            <ul>
-                {% for guarantee in client.guarantees.all %}
-                <li>
-                    <div class="flex mb-4 justify-between items-center">
-                    <p class="text-sm">{{ guarantee.description }}</span>
+        </div>
+
+        {% if lat and long %}
+        <div class="flex flex-wrap -m-4">
+            <div class="w-full p-4">
+                <div class="p-6 bg-white shadow rounded">
+                <div class="flex justify-between mb-4">
+                    <div class="flex items-center">
+                    <div>
+                        <div class="flex mb-2">
+                        <h3 class="font-bold">Datos del Aval</h3>
+                        </div>
                     </div>
-                </li>
-                {% endfor %}
-            </ul>
+                    </div>
+                </div>
+                
+                <iframe width="100%" height="400" 
+                src="https://maps.google.com/maps?q={{ lat }}, {{ long }}&z=17&output=embed"
+                frameborder="0" style="border:0">
+                </iframe>
+
             </div>
         </div>
-        </div>
+        {% endif %}
 
     </div>
 </section>
+
+<script>
+    let map;
+
+    function initMap() {
+        const mapOptions = {
+            zoom: 8,
+            center: { lat: -34.397, lng: 150.644 },
+        };
+
+        console.log('Si)')
+
+        map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+        const marker = new google.maps.Marker({
+            position: { lat: -34.397, lng: 150.644 },
+            map: map,
+        });
+        
+       
+    }
+
+</script>
 {% endblock %}

@@ -137,7 +137,9 @@ def detail(request, pk):
     
     return render(request, 'credits/detail.html', {
         'credit': credit,
-        'client': credit.client
+        'client': credit.client,
+        'lat': credit.client.lat, 
+        'long': credit.client.long
     })
     
     
