@@ -20,4 +20,7 @@ urlpatterns = [
     path('clientes/', include('clients.urls')),
     path('usuarios/', include('users.urls')),
     path('carpetas/', include('folders.urls')),
+    
+    
+    path('grupos/', include('groups.urls')),
 ]

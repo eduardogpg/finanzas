@@ -28,8 +28,8 @@
 		</p>
 	</div>
 
-    <a class="flex items-center justify-center py-2 text-sm text-white bg-indigo-500 hover:bg-indigo-600 rounded transition duration-200" href="{% url 'clients:detail' pk=client.pk %}">
-      <span>Ver detalles del cliente</span>
+    <a class="flex items-center justify-center py-2 text-sm text-white bg-indigo-500 hover:bg-indigo-600 rounded transition duration-200" href="{% url 'credits:detail' pk=client.credit.pk %}">
+      <span>Detalles</span>
     </a>
   </div>
 </div>

@@ -5,7 +5,10 @@ from django.urls import reverse
 from django.shortcuts import get_object_or_404
 
 from django.http import JsonResponse
+
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import Group
@@ -33,6 +36,15 @@ class GroupListView(ListView):
     def get_queryset(self):
         return self.folder.groups.all().order_by('-id')
 
+
+class GroupDetailView(DetailView):
+    model = Group
+    template_name = 'groups/detail.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+    
 
 @csrf_exempt
 def create(request, pk):

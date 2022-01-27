@@ -77,6 +77,11 @@ class Client(models.Model):
         return self.credits.first()
     
     
+    @property
+    def credit(self):
+        return self.credits.first()
+    
+    
 class Aval(models.Model):
     prospect = models.OneToOneField(Prospect, on_delete=models.CASCADE, primary_key=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='avals')

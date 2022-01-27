@@ -131,6 +131,15 @@ def create(request, pk, group_pk):
         'title':'Nuevo credito'
     })
     
+  
+def detail(request, pk):
+    credit = get_object_or_404(Credit, pk=pk)
+    
+    return render(request, 'credits/detail.html', {
+        'credit': credit,
+        'client': credit.client
+    })
+    
     
 def filter(request):
     response = dict()
