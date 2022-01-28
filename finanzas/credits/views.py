@@ -23,6 +23,12 @@ from guarantees.models import Guarantee
 from groups.models import Group
 from folders.models import Folder
 
+def index(request):
+    return render(request, 'credits/index.html', {
+        
+    })
+
+
 def clean_reference(form, reference):
     return {
         'name': form.cleaned_data[f'{reference}_name'],
@@ -30,6 +36,7 @@ def clean_reference(form, reference):
         'contact': form.cleaned_data[f'{reference}_contact'],
         'relationship':form.cleaned_data[f'{reference}_relationship'],
     }
+
 
 def create_entities(form, user, folder, group):
     prospect = Prospect(
@@ -142,14 +149,23 @@ def detail(request, pk):
         'long': credit.client.long
     })
     
-    
-def filter(request):
-    response = dict()
-    
-    if request.method == 'GET' and ( request.GET.get('pay') or request.GET.get('visit')):
-        
-        credits = Credit.objects.pay_day_today() if request.GET.get('pay') else Credit.objects.visit_day_today()
-        
-        response['credits'] = [  {'id': credit.id for credit in Credit.objects.pay_day_today()} ]
 
-    return JsonResponse(response)
+def search(request):
+    credits = list()
+    
+    if request.method == 'GET' and request.GET.get('q'):
+        query = request.GET['q'].lower()
+        
+        if query == 'all':
+            credits = Credit.objects.all().order_by('-id')
+            
+        if query == 'visitday':
+            credits = Credit.objects.pay_day_today()
+        
+        if query == 'payday':
+            credits = Credit.objects.pay_day_today()
+
+
+    return JsonResponse({
+        'credits': [ credit.serializer() for credit in credits ]
+    })

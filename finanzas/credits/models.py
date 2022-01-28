@@ -20,7 +20,7 @@ from folders.models import Folder
 class CreditManager(models.Manager):
     
     def pay_day_today(self):
-        now = timezone.now() + timedelta(days=7)
+        now = timezone.now()
         
         return self.filter(next_pay_day__year=now.year,
                            next_pay_day__month=now.month,
@@ -113,6 +113,17 @@ class Credit(models.Model):
         return ''
     
     
+    def serializer(self):
+        return {
+            'id': self.id,
+            'authorized_amount': self.authorized_amount,
+            'next_pay_day': self.next_pay_day,
+            'next_visit_day': self.next_visit_day,
+            'client': {
+                'id': self.id,
+                'name': self.client.full_name
+            }
+        }
     
 def set_uuid(sender, instance, *args, **kwargs):
     if not instance.uuid:
