@@ -135,6 +135,7 @@ class Address(models.Model):
         MEZCALAPA = 'Mezcalapa', _('Mezcalapa'),
         HONDURASDE_LA_SIERRA = 'Honduras de la Sierra', _('Honduras de la Sierra')
         
+        
     prospect = models.ForeignKey(Prospect, on_delete=models.CASCADE, related_name='addresses')
     address = models.CharField(max_length=255, null=False, blank=False)
     zip = models.IntegerField(null=True, blank=True)
