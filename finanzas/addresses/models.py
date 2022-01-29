@@ -118,22 +118,22 @@ class Address(models.Model):
         VILLACORZO = 'VillaCorzo', _('VillaCorzo'),
         VILLAFLORES = 'Villaflores', _('Villaflores'),
         YAJALON = 'Yajalón', _('Yajalón'),
-        SANLUCAS = 'SanLucas', _('SanLucas'),
+        SANLUCAS = 'San Lucas', _('San Lucas'),
         ZINACANTAN = 'Zinacantán', _('Zinacantán'),
         SAN_JUANCANCUC = 'San JuanCancuc', _('San JuanCancuc'),
         ALDAMA = 'Aldama', _('Aldama'),
-        BENEMERITODE_LAS_AMERICAS = 'Beneméritode las Américas', _('Beneméritode las Américas'),
-        MARAVILLATENEJAPA = 'MaravillaTenejapa', _('MaravillaTenejapa'),
+        BENEMERITODE_LAS_AMERICAS = 'Benemérito de las Américas', _('Benemérit ode las Américas'),
+        MARAVILLATENEJAPA = 'Maravilla Tenejapa', _('Maravilla Tenejapa'),
         MARQUESDE_COMILLAS = 'Marquésde Comillas', _('Marquésde Comillas'),
         MONTECRISTO_DE_GUERRERO = 'Montecristo de Guerrero', _('Montecristo de Guerrero'),
         SAN_ANDRES_DURAZNAL = 'San Andrés Duraznal', _('SanAndrés Duraznal'),
         SANTIAGOEL_PINAR = 'Santiago el Pinar', _('Santiagoel Pinar'),
         CAPITAN_LUIS_ANGEL_VIDAL = 'Capitán Luis Angel Vidal', _('Capitán Luis Angel Vidal'),
-        RINCONCHAMULA_SAN_PEDRO = 'RincónChamula San Pedro', _('RincónChamula San Pedro'),
+        RINCONCHAMULA_SAN_PEDRO = 'Rincón Chamula San Pedro', _('Rincón Chamula San Pedro'),
         ELPARRAL = 'ElParral', _('ElParral'),
         EMILIANOZAPATA = 'EmilianoZapata', _('EmilianoZapata'),
         MEZCALAPA = 'Mezcalapa', _('Mezcalapa'),
-        HONDURASDE_LA_SIERRA = 'Hondurasde la Sierra', _('Hondurasde la Sierra')
+        HONDURASDE_LA_SIERRA = 'Honduras de la Sierra', _('Honduras de la Sierra')
         
     prospect = models.ForeignKey(Prospect, on_delete=models.CASCADE, related_name='addresses')
     address = models.CharField(max_length=255, null=False, blank=False)
@@ -141,8 +141,8 @@ class Address(models.Model):
     state = models.CharField(max_length=255, null=False, blank=False, choices=STATES.choices, default='Chiapas') 
     suburb = models.CharField(max_length=255, null=True, blank=True) # Colonia
     township = models.CharField(max_length=255, null=True, blank=True, choices=TOWNSHIPS.choices) # Ciudad/Municipio
-    lat = models.IntegerField(null=True, blank=True)
-    long = models.IntegerField(null=True, blank=True)
+    lat = models.IntegerField(null=True, blank=True, default=None)
+    long = models.IntegerField(null=True, blank=True, default=None)
     
     created_at = models.DateTimeField(auto_now_add=True)
     

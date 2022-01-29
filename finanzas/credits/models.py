@@ -115,7 +115,7 @@ class Credit(models.Model):
     
     def serializer(self):
         return {
-            'id': self.id,
+            'id': self.pk,
             'authorized_amount': self.authorized_amount,
             'next_pay_day': self.next_pay_day,
             'next_visit_day': self.next_visit_day,

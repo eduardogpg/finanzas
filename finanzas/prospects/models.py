@@ -80,14 +80,12 @@ class Client(models.Model):
     
     @property
     def lat(self):
-        # return self.prospect.address.lat    
-        return 16.781174
+        return self.prospect.address.lat    
     
     
     @property
     def long(self):
-        # return self.prospect.address.long
-        return -93.098344
+        return self.prospect.address.long
     
     
 class Aval(models.Model):
