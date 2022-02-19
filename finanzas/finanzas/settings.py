@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'guarantees',
     'clients',
     'folders',
-    'groups'
+    'groups',
+    'payments'
 ]
 
 MIDDLEWARE = [

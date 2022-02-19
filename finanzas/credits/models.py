@@ -46,7 +46,7 @@ class Credit(models.Model):
         WEEKLY = 0, _('Semanal')
  
      
-    class VISIT_DAY(models.IntegerChoices):
+    class DAY(models.IntegerChoices):
         MONDAY = 0, _('Lunes')
         TUESDAY = 1, _('Martes')
         WEDNESDAY = 2, _('Miércoles')
@@ -71,6 +71,7 @@ class Credit(models.Model):
         TWENTY = 29, _('20:00 PM')
         
     
+    tarjeton = models.CharField(max_length=50, null=False, blank=False)
     uuid = models.CharField(max_length=50, null=False, blank=False)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='credits', null=True, blank=True)
     
@@ -83,16 +84,15 @@ class Credit(models.Model):
     
     cycle = models.IntegerField(default=0, choices=CYCLE.choices) # Semanal
     
-    term = models.IntegerField(default=0, null=False, blank=False)
-    visit_day = models.IntegerField(default=0, choices=VISIT_DAY.choices, null=False, blank=False) # Día de la visita
+    term = models.IntegerField(default=15, null=False, blank=False)
+    visit_day = models.IntegerField(default=0, choices=DAY.choices, null=False, blank=False) # Día de la visita
     visit_time = models.IntegerField(default=0, choices=VISIT_TIME.choices, null=False, blank=False) # Hola de la visita
     
+    visit_found = models.IntegerField(default=0, choices=DAY.choices, null=False, blank=False) # Día en que se entrego el pago
     created_at = models.DateTimeField(auto_now_add=True)
     
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
-    next_pay_day = models.DateField(null=True, blank=True, default=None)
-    next_visit_day = models.DateField(null=True, blank=True, default=None)
 
     objects = CreditManager()
 
@@ -130,10 +130,13 @@ def set_uuid(sender, instance, *args, **kwargs):
         instance.uuid = str(uuid.uuid4())[:8]
 
 
-def set_next_pay_day(sender, instance, created, raw, using, update_fields, *args, **kwargs):
-    if created and instance.next_pay_day is None:
-        instance.next_pay_day = timezone.now() + timedelta(days=7)
-        instance.save()
+def create_payments(sender, instance, created, raw, using, update_fields, *args, **kwargs):
+    if created:
+        next_pay_day = timezone.now() 
+        
+        for order in range(0, instance.term):
+            next_pay_day = next_pay_day + timedelta(days=7)
+            instance.payments.create(order=order, pay_day=next_pay_day)
 
 
 def set_next_visit_day(sender, instance, created, raw, using, update_fields, *args, **kwargs):
@@ -143,6 +146,4 @@ def set_next_visit_day(sender, instance, created, raw, using, update_fields, *ar
         
 
 pre_save.connect(set_uuid, sender=Credit)
-
-post_save.connect(set_next_pay_day, sender=Credit)
-post_save.connect(set_next_visit_day, sender=Credit)
+post_save.connect(create_payments, sender=Credit)

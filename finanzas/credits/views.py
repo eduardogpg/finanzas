@@ -73,10 +73,10 @@ def create_entities(form, user, folder, group):
             client=client,
             request_amount=form.cleaned_data['request_amount'],
             authorized_amount=form.cleaned_data['authorized_amount'],
-            cycle=form.cleaned_data['weekly'],
-            term=form.cleaned_data['term'],
+            tarjeton=form.cleaned_data['tarjeton'],
             visit_day=form.cleaned_data['visit_day'],
             visit_time=form.cleaned_data['visit_time'],
+            visit_found=form.cleaned_data['visit_time'],
             user=user,
             folder=folder,
             group=group

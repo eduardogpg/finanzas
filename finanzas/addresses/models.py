@@ -142,8 +142,9 @@ class Address(models.Model):
     state = models.CharField(max_length=255, null=False, blank=False, choices=STATES.choices, default='Chiapas') 
     suburb = models.CharField(max_length=255, null=True, blank=True) # Colonia
     township = models.CharField(max_length=255, null=True, blank=True, choices=TOWNSHIPS.choices) # Ciudad/Municipio
-    lat = models.IntegerField(null=True, blank=True, default=None)
-    long = models.IntegerField(null=True, blank=True, default=None)
+    
+    lat = models.CharField(null=True, blank=True, default=None, max_length=100)
+    long = models.CharField(null=True, blank=True, default=None, max_length=100)
     
     created_at = models.DateTimeField(auto_now_add=True)
     

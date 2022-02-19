@@ -46,6 +46,8 @@ class Client(models.Model):
     children = models.IntegerField(null=False, blank=False, default=0)
     prospect = models.OneToOneField(Prospect, on_delete=models.CASCADE, primary_key=True)
     
+    note = models.TextField(null=True, blank=True, default='')
+    
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

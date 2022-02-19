@@ -1,4 +1,58 @@
-Mostrar la cantidad de prestamos en el grupo.
-Al dar click en el grupo se deben ver los prestamos.
-Añadir google maps a el credito.
+# **Requerimientos**
 
+**Añadir nuevos campos al formulario:**
+
+Día de visita
+
+Día de pago
+
+Tarjeton
+
+Modelo client: Notal al cliente
+
+Bloquear cliente!!!! Al momento de editar (Admin)
+
+**Tarjetas:**
+
+Formato día de la semana - Hora
+
+Añadir Botón Control de pagos
+
+**Requerimientos**
+
+Añadir el día que se entrego el credito en captura. (Día de desenvolzo¿)
+
+Mismo día de la semana.
+
+```
+Cada semana +7. dìas
+15 semanas. (Generar 15 registros?)
+
+```
+
+**Errores:**
+
+Los Nav no funciona bien.
+
+Lat and Long errores de Tipo.
+
+Folder and Grupo erroneos.
+
+**Filtro por día de la semana.**
+
+Calendario.
+
+Nombre de la carpeta.
+
+Añadir En que visita van (Grupos)
+Poder modificar todos los campos.
+
+* Folder el mismo
+* Automatico nuevo grupo.
+* Sacar del grupo.
+
+En que grupo esta la persona.
+En que folder esta la persona.
+Número de prestamos.
+
+Prestamos finalizados.

@@ -19,6 +19,8 @@
 
         <hr class="mb-4">
 
+        {% include 'snippets/input.html' with input=form.tarjeton %}
+
         <div class="flex flex-wrap -mx-4 -mb-4 md:mb-0">
             <div class="w-full md:w-1/2 px-4 mb-4 md:mb-0">
                 <div class="mb-6">
@@ -43,10 +45,15 @@
                     {% include 'snippets/input.html' with input=form.visit_time %}
                 </div>
             </div>
+
+            <div class="w-full md:w-1/2 px-4 mb-4 md:mb-0">
+                <div class="mb-6">
+                    {% include 'snippets/input.html' with input=form.visit_found %}
+                </div>
+            </div>
         </div>
 
         {% include 'snippets/input.html' with input=form.term %}
-        {% include 'snippets/input.html' with input=form.weekly %}
 
     </div>
 

@@ -13,16 +13,18 @@ class NewCreditForm(forms.Form):
     select_input_css = 'appearance-none block w-full px-4 py-3 mb-2 text-sm placeholder-gray-500 bg-white border rounded'
     
     # Plazo
-    folder = forms.CharField(label='Folder', required=True)
-    group = forms.CharField(label='Grupo', required=True)
+    folder = forms.CharField(label='Folder', required=False)
+    group = forms.CharField(label='Grupo', required=False)
+    # term = forms.CharField(label='Plazo', initial=15,  required=True)
     
-    term = forms.IntegerField(label='Plazo', initial=1,  required=True)
-    weekly = forms.BooleanField(label='Semanal', initial=True,  required=True)
-    visit_day = forms.ChoiceField(label='Día de la visita', choices=Credit.VISIT_DAY.choices, required=True)
-    visit_time = forms.ChoiceField(label='Hora de la visita', choices=Credit.VISIT_TIME.choices, required=True)
+    visit_day = forms.ChoiceField(label='Día de visita', choices=Credit.DAY.choices, required=True)
+    visit_found = forms.ChoiceField(label='Día de desembolso', choices=Credit.DAY.choices, required=True)
+    visit_time = forms.ChoiceField(label='Hora de visita', choices=Credit.VISIT_TIME.choices, required=True)
     
-    request_amount = forms.CharField(label='Credito Solicitado', max_length=10, required=True, initial=0)
-    authorized_amount = forms.CharField(label='Credito Autorizado', max_length=10, required=True, initial=0)
+    tarjeton = forms.CharField(label='Tarjetón', required=True)
+    
+    request_amount = forms.CharField(label='Credito Solicitado (MXN)', max_length=10, required=True, initial=0)
+    authorized_amount = forms.CharField(label='Credito Autorizado (MXN)', max_length=10, required=True, initial=0)
     
     name = forms.CharField(label='Nombre(s)', max_length=100, required=True)
     last_name = forms.CharField(label='Apellidos', max_length=100, required=True)
@@ -84,13 +86,19 @@ class NewCreditForm(forms.Form):
 
         self.fields['folder'].widget.attrs['class'] =  'disabled:opacity-75 block w-full px4 py-3 mb-2 text-sm border rounded'
         self.fields['group'].widget.attrs['class'] =  'disabled:opacity-75 block w-full px4 py-3 mb-2 text-sm border rounded'
+        # self.fields['term'].widget.attrs['class'] =  'disabled:opacity-75 block w-full px4 py-3 mb-2 text-sm border rounded'
         
         self.fields['folder'].widget.attrs['disabled'] = True
         self.fields['group'].widget.attrs['disabled'] = True
+        # self.fields['term'].widget.attrs['disabled'] = True
         
-        self.fields['term'].widget.attrs['class'] = self.select_input_css
+        self.fields['tarjeton'].widget.attrs['class'] =  self.input_text_css
+        
         self.fields['visit_day'].widget.attrs['class'] = self.select_input_css
         self.fields['visit_time'].widget.attrs['class'] = self.select_input_css
+        self.fields['visit_found'].widget.attrs['class'] = self.select_input_css
+        
+        
         self.fields['request_amount'].widget.attrs['class'] = self.input_text_css
         self.fields['authorized_amount'].widget.attrs['class'] = self.input_text_css
         
@@ -139,6 +147,7 @@ class NewCreditForm(forms.Form):
         self.fields['guarantee_1'].widget.attrs['class'] = self.input_text_css
         self.fields['guarantee_2'].widget.attrs['class'] = self.input_text_css
         self.fields['guarantee_3'].widget.attrs['class'] = self.input_text_css
+        
         
     def clean_phone_number(self):
         data = self.cleaned_data['phone_number']
