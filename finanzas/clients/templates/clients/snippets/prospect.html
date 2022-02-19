@@ -7,60 +7,60 @@
             </svg>
         </span>
         -->
-      <h4 class="text-sm text-gray-500">Nombre completo</h4>
+      <h4 class="text-lg text-gray-500">Nombre completo</h4>
     </div>
-    <span class="text-sm">{{ prospect.full_name }}</span>
+    <span class="text-lg">{{ prospect.full_name }}</span>
 </div>
 <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">Número teléfonico</h4>
+      <h4 class="text-lg text-gray-500">Número teléfonico</h4>
     </div>
-    <span class="text-sm">{{ prospect.phone_number }}</span>
+    <span class="text-lg">{{ prospect.phone_number }}</span>
 </div>
 <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">CURP</h4>
+      <h4 class="text-lg text-gray-500">CURP</h4>
     </div>
-    <span class="text-sm">{{ prospect.curp }}</span>
+    <span class="text-lg">{{ prospect.curp }}</span>
 </div>
 <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">Clave de elector</h4>
+      <h4 class="text-lg text-gray-500">Clave de elector</h4>
     </div>
-    <span class="text-sm">{{ prospect.DNI }}</span>
+    <span class="text-lg">{{ prospect.DNI }}</span>
 </div>
 
 <hr class="mt-4 mb-4">
 
 <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">Domicilio</h4>
+      <h4 class="text-lg text-gray-500">Domicilio</h4>
     </div>
-    <span class="text-sm">{{ address }}</span>
+    <span class="text-lg">{{ address }}</span>
 </div>
 <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">Colonia</h4>
+      <h4 class="text-lg text-gray-500">Colonia</h4>
     </div>
-    <span class="text-sm">{{ address.suburb }}</span>
+    <span class="text-lg">{{ address.suburb }}</span>
 </div>
 <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">Municipio</h4>
+      <h4 class="text-lg text-gray-500">Municipio</h4>
     </div>
-    <span class="text-sm">{{ address.township }}</span>
+    <span class="text-lg">{{ address.township }}</span>
 </div>
 <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">Estado</h4>
+      <h4 class="text-lg text-gray-500">Estado</h4>
     </div>
-    <span class="text-sm">{{ address.state_format }}</span>
+    <span class="text-lg">{{ address.state_format }}</span>
 </div>
 <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">Código Postal</h4>
+      <h4 class="text-lg text-gray-500">Código Postal</h4>
     </div>
-    <span class="text-sm">{{ address.zip }}</span>
+    <span class="text-lg">{{ address.zip }}</span>
 </div>
 
 {% if customer %}
@@ -68,27 +68,27 @@
   
   <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">Estado civil</h4>
+      <h4 class="text-lg text-gray-500">Estado civil</h4>
     </div>
-    <span class="text-sm">{{ customer.marital_state_format }}</span>
+    <span class="text-lg">{{ customer.marital_state_format }}</span>
   </div>
   <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">Ocupación</h4>
+      <h4 class="text-lg text-gray-500">Ocupación</h4>
     </div>
-    <span class="text-sm">{{ customer.job }}</span>
+    <span class="text-lg">{{ customer.job }}</span>
   </div>
   <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">Nombre del conyugue</h4>
+      <h4 class="text-lg text-gray-500">Nombre del conyugue</h4>
     </div>
-    <span class="text-sm">{{ customer.spouse }}</span>
+    <span class="text-lg">{{ customer.spouse }}</span>
   </div>
   <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">Número de hijos</h4>
+      <h4 class="text-lg text-gray-500">Número de hijos</h4>
     </div>
-    <span class="text-sm">{{ customer.children }}</span>
+    <span class="text-lg">{{ customer.children }}</span>
   </div>
 
 {% endif %}

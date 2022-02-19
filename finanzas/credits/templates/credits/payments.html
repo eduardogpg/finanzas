@@ -1,0 +1,67 @@
+{% extends 'bases/base.html' %}
+{% load client_extras %}
+
+
+{% block content %}
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+<section class="py-8">  
+    <div class="container px-4 mx-auto">
+        
+        <div class="flex mb-2 items-center justify-center">
+            <a class="text-2xl text-indigo-500" href="{% url 'credits:detail' credit.pk %}">Detalles</a>
+            <p class="ml-5 mr-5"> | </p>
+            <p class="text-2xl text-gray-500 text-bold" href="#">Pagos</p>
+        </div>
+    
+        <div class="py-4 bg-white rounded">
+            
+            <div class="pt-4 px-4 overflow-x-auto">
+              <table class="table-auto w-full">
+                <thead>
+                  <tr class="text-xs text-gray-500 text-left">
+                      <th class="text-lg">Número de Pago</th>
+                        <th class="text-lg">Fecha de pago</th>
+                        <th class="text-lg">Monto a pagar</th>
+                        <th class="text-lg">Status</th>
+                        <th class="text-lg">Fecha de abono</th></tr>
+                </thead>
+                <tbody>
+                    {% for payment in payments %}
+                        <tr class="text-xs {% if forloop.counter|divisibleby:2 %}bg-gray-50{% endif %}">
+                            <td class="flex px-4 py-3">
+                            <div>
+                                <p class="font-base">{{ payment.order }}</p>
+                            </div>
+                            </td>
+                            <td class="font-base">{{ payment.pay_day|date_format }}</td>
+                            <td class="font-base">${{ payment.amount }} MXN</td>
+                            <td>
+                                {% if payment.state == 0 %}
+                                    <span class="inline-block py-1 px-2 text-white bg-orange-500 rounded-full">{{ payment.state_format }}</span>
+                                {% elif payment.state == 1 %}
+                                    <span class="inline-block py-1 px-2 text-white bg-green-500 rounded-full">{{ payment.state_format }}</span>
+                                {% elif payment.state == 2 %}
+                                    <span class="inline-block py-1 px-2 text-white bg-red-500 rounded-full">{{ payment.state_format }}</span>
+                                {% endif %}
+                            </td>
+                            <td class="font-base">
+                                {% if payment.payed_day %}
+                                    {{ payment.payed_day|date_format }}
+                                {% else %}
+                                    No aplica.
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+    </div>
+</section>
+
+{% endblock %}

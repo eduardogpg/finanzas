@@ -140,7 +140,7 @@ def create(request, pk, group_pk):
         'title':'Nuevo credito'
     })
     
-  
+@login_required(login_url='login')
 def detail(request, pk):
     credit = get_object_or_404(Credit, pk=pk)
     
@@ -149,6 +149,17 @@ def detail(request, pk):
         'client': credit.client,
         'lat': credit.client.lat, 
         'long': credit.client.long
+    })
+    
+
+@login_required(login_url='login')
+def payments(request, pk):
+    credit = get_object_or_404(Credit, pk=pk)
+    
+    return render(request, 'credits/payments.html', {
+        'credit': credit,
+        'client': credit.client,
+        'payments': credit.payments.all()
     })
     
 

@@ -12,6 +12,12 @@
 <section class="py-8">
     <div class="container px-4 mx-auto">
         
+        <div class="flex mb-2 items-center justify-center">
+            <p class="text-2xl text-gray-500 text-bold" href="#">Detalles</p>
+            <p class="ml-5 mr-5"> | </p>
+            <a class="text-2xl text-indigo-500" href="{% url 'credits:payments' credit.pk %}">Pagos</a>
+        </div>
+
         <div class="flex flex-wrap -m-4">
             <div class="w-full p-4">
             <div class="p-6 bg-white shadow rounded">
@@ -103,7 +109,7 @@
                     {% for guarantee in client.guarantees.all %}
                     <li>
                         <div class="flex mb-4 justify-between items-center">
-                        <p class="text-sm">{{ guarantee.description }}</span>
+                        <p class="text-lg">{{ guarantee.description }}</span>
                         </div>
                     </li>
                     {% endfor %}

@@ -1,57 +1,57 @@
 <div class="flex mb-4 justify-between items-center">
   <div class="flex items-center">
-    <h4 class="text-sm text-gray-500">Folder</h4>
+    <h4 class="text-lg text-gray-500">Folder</h4>
   </div>
-  <span class="text-sm">{{ credit.folder.name }}</span>
+  <span class="text-lg">{{ credit.folder.name }}</span>
 </div>
 <div class="flex mb-4 justify-between items-center">
   <div class="flex items-center">
-    <h4 class="text-sm text-gray-500">Grupo</h4>
+    <h4 class="text-lg text-gray-500">Grupo</h4>
   </div>
-  <span class="text-sm">{{ credit.group.name }}</span>
+  <span class="text-lg">{{ credit.group.name }}</span>
 </div>
 
 <hr class="mt-4 mb-4">
 
 <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">Monto de credito solicitado</h4>
+      <h4 class="text-lg text-gray-500">Monto de credito solicitado</h4>
     </div>
-    <span class="text-sm">${{ credit.request_amount }} MXN</span>
+    <span class="text-lg">${{ credit.request_amount }} MXN</span>
 </div>
 <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">Monto de credito aprobado</h4>
+      <h4 class="text-lg text-gray-500">Monto de credito aprobado</h4>
     </div>
-    <span class="text-sm">${{ credit.authorized_amount }} MXN</span>
+    <span class="text-lg">${{ credit.authorized_amount }} MXN</span>
 </div>
 <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">CIclos de visita</h4>
+      <h4 class="text-lg text-gray-500">CIclos de visita</h4>
     </div>
-    <span class="text-sm">Semanal</span>
+    <span class="text-lg">Semanal</span>
 </div>
 <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">Plazo de credito</h4>
+      <h4 class="text-lg text-gray-500">Plazo de credito</h4>
     </div>
-    <span class="text-sm">{{ credit.term }}</span>
+    <span class="text-lg">{{ credit.term }}</span>
 </div>
 <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">Día de visita</h4>
+      <h4 class="text-lg text-gray-500">Día de visita</h4>
     </div>
-    <span class="text-sm">{{ credit.visit_day_format }}</span>
+    <span class="text-lg">{{ credit.visit_day_format }}</span>
 </div>
 <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-sm text-gray-500">Hora de visita</h4>
+      <h4 class="text-lg text-gray-500">Hora de visita</h4>
     </div>
-    <span class="text-sm">{{ credit.visit_time_format }}</span>
+    <span class="text-lg">{{ credit.visit_time_format }}</span>
 </div>
 <div class="flex mb-4 justify-between items-center">
     <div class="flex items-center">
-      <h4 class="text-gray-500 text-bold">Pagos</h4>
+      <h4 class="text-lg text-gray-500 text-bold">Pagos</h4>
     </div>
-    <span class="text-bol">{{ credit.payments_completed.count }}/{{ credit.term }}</span>
+    <span class="text-lg text-bold">{{ credit.payments_completed.count }}/{{ credit.term }}</span>
 </div>

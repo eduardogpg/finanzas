@@ -24,7 +24,9 @@ class Payment(models.Model):
     credit = models.ForeignKey(Credit, on_delete=models.CASCADE, related_name='payments', null=True, blank=True)
     uuid = models.CharField(max_length=50, null=False, blank=False)
     order = models.IntegerField()
-    pay_day = models.DateField(null=True, blank=True, default=None)
+    amount = models.IntegerField(default=0, null=False, blank=False)
+    pay_day = models.DateField(null=True, blank=True, default=None) # Día en el que se debe pagar
+    payed_day = models.DateField(null=True, blank=True, default=None) # Día en el se pago
     state = models.IntegerField(default=STATE.PENDING, choices=STATE.choices) # PENDING
     created_at = models.DateTimeField(auto_now_add=True)
     
@@ -33,6 +35,10 @@ class Payment(models.Model):
     def __str__(self):
         return f'{self.uuid}'
     
+
+    @property
+    def state_format(self):
+        return Payment.STATE.choices[self.state][1]
 
     
 def set_uuid(sender, instance, *args, **kwargs):
