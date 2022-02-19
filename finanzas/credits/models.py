@@ -101,7 +101,7 @@ class Credit(models.Model):
     
     @property
     def visit_day_format(self):
-        return Credit.VISIT_DAY.choices[self.visit_day][1]
+        return Credit.DAY.choices[self.visit_day][1]
     
 
     @property
@@ -111,6 +111,11 @@ class Credit(models.Model):
                 return text
     
         return ''
+    
+    
+    @property
+    def next_pay_day(self):
+        return self.payments.first().pay_day
     
     
     def serializer(self):

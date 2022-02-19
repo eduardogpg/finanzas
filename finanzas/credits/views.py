@@ -69,7 +69,7 @@ def create_entities(form, user, folder, group):
             prospect=prospect
         )
 
-        Credit.objects.create(
+        credit = Credit.objects.create(
             client=client,
             request_amount=form.cleaned_data['request_amount'],
             authorized_amount=form.cleaned_data['authorized_amount'],
@@ -111,7 +111,7 @@ def create_entities(form, user, folder, group):
         Guarantee.objects.create(client=client, description=form.cleaned_data['guarantee_2'])
         Guarantee.objects.create(client=client, description=form.cleaned_data['guarantee_3'])
         
-        return client
+        return credit
     
 
 @login_required(login_url='login')
@@ -127,8 +127,10 @@ def create(request, pk, group_pk):
     form = NewCreditForm(request.POST or None, initial=initial)
     
     if request.method == 'POST' and form.is_valid():
-        if create_entities(form, request.user, folder, group):
-            return redirect('index')
+        credit = create_entities(form, request.user, folder, group)
+        
+        if credit:
+            return redirect('credits:detail', credit.id)
     
 
     return render(request, 'credits/create.html', {

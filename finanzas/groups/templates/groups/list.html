@@ -12,9 +12,9 @@
           <div class="flex flex-wrap items-center mb-3">
             <div>
               <div class="flex items-center">
-                <a href="{% url 'folders:list' %}" class="cursor-pointer">
-                  <h3 class="mr-2 text-xl font-bold">Grupos - {{ folder.name }} </h3>
-                </a>
+                    <h3 class="mr-2 text-xl font-bold">Grupos de: 
+                        <a href="{% url 'folders:list' %}" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" >{{ folder.name }}</a>
+                    </h3>
               </div>
             </div>
             <button class="ml-auto flex items-center py-2 px-3 text-xs text-white bg-indigo-500 hover:bg-indigo-600 rounded" type="button" data-modal-toggle="modal">
