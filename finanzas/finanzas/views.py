@@ -19,7 +19,9 @@ def dashboard(request):
         'title' :'Finanzas del sur',
         'clients': Client.objects.all()
     }
-    return render(request, 'index.html', context)
+    return redirect('folders:list')
+
+    # return render(request, 'index.html', context)
 
 
 def index(request):

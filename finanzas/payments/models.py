@@ -16,7 +16,7 @@ class PaymentManager(models.Manager):
 class Payment(models.Model):
     
     class STATE(models.IntegerChoices):
-        CREATED = 0, _('Creado')
+        PENDING = 0, _('Pendiente')
         PAYED = 1, _('Pagado')
         FAILED = 2, _('Fallido')
 
@@ -25,7 +25,7 @@ class Payment(models.Model):
     uuid = models.CharField(max_length=50, null=False, blank=False)
     order = models.IntegerField()
     pay_day = models.DateField(null=True, blank=True, default=None)
-    state = models.IntegerField(default=STATE.CREATED, choices=STATE.choices) # CREATED
+    state = models.IntegerField(default=STATE.PENDING, choices=STATE.choices) # PENDING
     created_at = models.DateTimeField(auto_now_add=True)
     
     objects = PaymentManager()

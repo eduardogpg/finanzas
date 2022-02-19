@@ -105,6 +105,11 @@ class Credit(models.Model):
     
 
     @property
+    def state_format(self):
+        return Credit.STATE.choices[self.state][1]
+    
+    
+    @property
     def visit_time_format(self):
         for val, text in Credit.VISIT_TIME.choices:
             if val == self.visit_time:
@@ -117,6 +122,15 @@ class Credit(models.Model):
     def next_pay_day(self):
         return self.payments.first().pay_day
     
+    
+    @property
+    def payments_completed(self):
+        return self.payments.filter(state=1)
+    
+    
+    def payments_pending(self):
+        return self.payments.filter(state=0)
+            
     
     def serializer(self):
         return {

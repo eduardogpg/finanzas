@@ -22,4 +22,7 @@ def detail(request, pk):
     
     return render(request, 'clients/detail.html', {
         'client': client,
+        'lat': client.address.lat,
+        'long': client.address.lat,
+        'credits': client.credits.order_by('-id')
     })
