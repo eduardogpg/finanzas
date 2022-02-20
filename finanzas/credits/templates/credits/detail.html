@@ -13,9 +13,13 @@
     <div class="container px-4 mx-auto">
         
         <div class="flex mb-2 items-center justify-center">
-            <p class="text-2xl text-gray-500 text-bold" href="#">Detalles</p>
-            <p class="ml-5 mr-5"> | </p>
-            <a class="text-2xl text-indigo-500" href="{% url 'credits:payments' credit.pk %}">Pagos</a>
+            <a class="items-center py-2 px-3 text-lg text-white bg-blue-500 hover:bg-greemn-600 rounded" href="{% url 'credits:detail' credit.pk %}">
+                Detalles
+            </a>
+            <p class="ml-2 mr-2"> | </p>
+            <a href="{% url 'credits:payments' credit.pk %}"  class="items-center py-2 px-3 text-lg text-white bg-blue-500 hover:bg-greemn-600 rounded">
+                <span>Pagos</span>
+            </a>
         </div>
 
         <div class="flex flex-wrap -m-4">

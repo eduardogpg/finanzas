@@ -194,5 +194,5 @@ def search(request):
         ]
     })
     
-#$     <a :href="'/folders/detalle/' + 1" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
+#$    
     
