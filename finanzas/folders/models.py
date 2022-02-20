@@ -7,6 +7,4 @@ class Folder(models.Model):
     def __str__(self):
         return self.name
     
-    @property
-    def credits(self):
-        return 0
+    

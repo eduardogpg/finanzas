@@ -1,5 +1,8 @@
-from django.http import JsonResponse
+from datetime import datetime
+from django.utils import timezone
 
+
+from django.http import JsonResponse
 from django.db import transaction
 
 from django.contrib.auth.decorators import login_required
@@ -18,14 +21,16 @@ from prospects.models import Client
 from prospects.models import Prospect
 from prospects.models import Reference
 
+from payments.models import Payment
+
 from guarantees.models import Guarantee
 
 from groups.models import Group
 from folders.models import Folder
 
 def index(request):
+    
     return render(request, 'credits/index.html', {
-        
     })
 
 
@@ -164,21 +169,30 @@ def payments(request, pk):
     
 
 def search(request):
-    credits = list()
+    folders = list()
     
     if request.method == 'GET' and request.GET.get('q'):
-        query = request.GET['q'].lower()
+        query = request.GET['q']
         
-        if query == 'all':
-            credits = Credit.objects.all().order_by('-id')
-            
-        if query == 'visitday':
-            credits = Credit.objects.pay_day_today()
-        
-        if query == 'payday':
-            credits = Credit.objects.pay_day_today()
+        if query == 'today':
+            current_date = timezone.now().date()
+        else:
+            current_date = datetime.strptime(query, '%Y-%m-%d')
 
+        # select Related o prefetch_related
+        folders = Folder.objects.prefetch_related('credits').filter(credits__payments__pay_day=current_date)
 
     return JsonResponse({
-        'credits': [ credit.serializer() for credit in credits ]
+        'credits': [ 
+            {
+                'id': folder.id,
+                'name': folder.name,
+                'visit_date': current_date.strftime('%Y-%m-%d'),
+                'credits': folder.credits.count()
+            }
+            for folder in folders
+        ]
     })
+    
+#$     <a :href="'/folders/detalle/' + 1" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
+    

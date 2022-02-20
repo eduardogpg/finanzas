@@ -132,18 +132,6 @@ class Credit(models.Model):
         return self.payments.filter(state=0)
             
     
-    def serializer(self):
-        return {
-            'id': self.pk,
-            'authorized_amount': self.authorized_amount,
-            'next_pay_day': self.next_pay_day,
-            'next_visit_day': self.next_visit_day,
-            'client': {
-                'id': self.id,
-                'name': self.client.full_name
-            }
-        }
-    
 def set_uuid(sender, instance, *args, **kwargs):
     if not instance.uuid:
         instance.uuid = str(uuid.uuid4())[:8]
@@ -152,10 +140,11 @@ def set_uuid(sender, instance, *args, **kwargs):
 def create_payments(sender, instance, created, raw, using, update_fields, *args, **kwargs):
     if created:
         next_pay_day = timezone.now() 
+        amount = ((float(instance.authorized_amount) * 0.50) + float(instance.authorized_amount)) // float(instance.term)
         
         for order in range(0, instance.term):
             next_pay_day = next_pay_day + timedelta(days=7)
-            instance.payments.create(order=order, pay_day=next_pay_day)
+            instance.payments.create(order=order, pay_day=next_pay_day, amount=amount)
 
 
 def set_next_visit_day(sender, instance, created, raw, using, update_fields, *args, **kwargs):

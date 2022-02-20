@@ -13,8 +13,8 @@ class NewCreditForm(forms.Form):
     select_input_css = 'appearance-none block w-full px-4 py-3 mb-2 text-sm placeholder-gray-500 bg-white border rounded'
     
     # Plazo
-    folder = forms.CharField(label='Folder', required=False)
-    group = forms.CharField(label='Grupo', required=False)
+    # folder = forms.CharField(label='Folder', required=False)
+    # group = forms.CharField(label='Grupo', required=False)
     # term = forms.CharField(label='Plazo', initial=15,  required=True)
     
     visit_day = forms.ChoiceField(label='Día de visita', choices=Credit.DAY.choices, required=True)
@@ -84,12 +84,12 @@ class NewCreditForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(NewCreditForm, self).__init__(*args, **kwargs)
 
-        self.fields['folder'].widget.attrs['class'] =  'disabled:opacity-75 block w-full px4 py-3 mb-2 text-sm border rounded'
-        self.fields['group'].widget.attrs['class'] =  'disabled:opacity-75 block w-full px4 py-3 mb-2 text-sm border rounded'
+        # self.fields['folder'].widget.attrs['class'] =  'disabled:opacity-75 block w-full px4 py-3 mb-2 text-sm border rounded'
+        # self.fields['group'].widget.attrs['class'] =  'disabled:opacity-75 block w-full px4 py-3 mb-2 text-sm border rounded'
         # self.fields['term'].widget.attrs['class'] =  'disabled:opacity-75 block w-full px4 py-3 mb-2 text-sm border rounded'
         
-        self.fields['folder'].widget.attrs['disabled'] = True
-        self.fields['group'].widget.attrs['disabled'] = True
+        # self.fields['folder'].widget.attrs['disabled'] = True
+        # self.fields['group'].widget.attrs['disabled'] = True
         # self.fields['term'].widget.attrs['disabled'] = True
         
         self.fields['tarjeton'].widget.attrs['class'] =  self.input_text_css
